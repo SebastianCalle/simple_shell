@@ -4,13 +4,15 @@
 
 int main()
 {
-	char buff[32];
-	char *b = buff;
-	size_t i = 32;
+	char *buff;
+        unsigned int i;
 
         write(STDOUT_FILENO, "$ ", 2);
-	_getline(&b, i);
-	printf("%s\n", buff);
+	buff = _getline();
+        for (i = 0; buff[i]; i++)
+		write(STDOUT_FILENO, &buff[i], 1);
+
+        _putchar(10);
 
 	return (0);
 }

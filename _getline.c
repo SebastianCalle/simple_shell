@@ -1,17 +1,18 @@
 #include "shell.h"
 
-int _getline(char **b, unsigned int n)
+char *_getline(void)
 {
-        char *buff = *b;
+        char buff[SIZE];
+	char *b = buff;
 	static int status, c, i = 0;
 
-	while (n > 0 && (c = _getchar()) != EOF && c != '\n')
+	while ((c = _getchar()) != EOF && c != '\n')
 	{
-		*(buff + i) = c;
+		*(b + i) = c;
 		i++;
 	}
 
-	*(buff + i) = '\0';
+	*(b + i) = '\0';
 
-	return (i);
+	return (b);
 }

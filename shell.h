@@ -10,7 +10,8 @@
 #include <fcntl.h>
 #define SIZE 1024
 
+int _putchar(char c);
 int _getchar(void);
-int _getline(char **b, unsigned int n);
+char *_getline(void);
 
 #endif
