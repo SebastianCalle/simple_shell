@@ -1,2 +1,2 @@
-# simple_shell
-It is a simple shell 
+# shell_test
+Test for the shell project
