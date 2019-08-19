@@ -1,18 +1,23 @@
 #include "shell.h"
 
-
-void sh_loop(void)
+int main(void)
 {
-  char *line;
-  char **args;
-  int status;
+	char *line;
+	char **args;
+	int status, j = 0, fl;
 
-  do {
-    printf("> ");
-    line = _getline();
-    args = _strtok(line);
-    status = lsh_launch(args);
+	while (status)
+	{
+		fl = 0;
+		line = _getline(&fl);
+		args = _strtok(line, &j);
+		status = execute(args);
 
-    free(args);
-  } while (status);
+		j = 0;
+		free(line);
+		free(*args);
+		free(args);
+
+	}
+	return(0);
 }

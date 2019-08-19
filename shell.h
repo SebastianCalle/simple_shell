@@ -15,8 +15,9 @@ void sh_loop(void);
 int count_letters(char *str, int *index, int *i);
 int check_del(char c, char b);
 int count_arg(char *str);
-char **_strtok(char *buffer);
-int lsh_launch(char **args);
+char **_strtok(char *buffer, int *j);
+int execute(char **args);
 int _getchar(void);
-char *_getline(void);
+char *_getline(int *fl);
+char *lsh_read_line(void);
 #endif
