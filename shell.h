@@ -2,11 +2,10 @@
 #define SHELL_H
 #define SIZE 1024
 #include <stdio.h>
-#include "shell.h"
 #include <string.h>
 #include <stdlib.h>
-#include <sys/wait.h>
 #include <unistd.h>
+#include <sys/wait.h>
 //typedef node_s
 //	char *s;
 //	struct node_s *next;

@@ -1,4 +1,4 @@
-#include "shell.c"
+#include "shell.h"
 
 int execute(char **args)
 {
@@ -10,6 +10,7 @@ int execute(char **args)
 		if (execve(args[0], args, NULL) == -1) {
 			perror("sh");
 		}
+		free(args[0]);
 		exit(EXIT_FAILURE);
 	} else if (pid < 0) {
 		perror("sh");

@@ -1,13 +1,20 @@
 #include "shell.h"
 
+//void prompt(void)
+//{
+//
+//	write(1, "$ ", 2);
+//}
 int main(void)
 {
 	char *line;
 	char **args;
 	int status = 1, j = 0, i;
 
+
 	while (status)
 	{
+		write(1, "$ ", 2);
 		line = read_line();
 		if (line[0] == '\n')
 		{
@@ -30,6 +37,7 @@ int main(void)
 		if (args != NULL)
 			free(args);
 
+//		prompt();
 	}
 	return(0);
 }
