@@ -96,34 +96,3 @@ int count_arg(char *str)
 	}
 	return (c);
 }
-/*
-int main(void)
-{
-	int a = 0, b;
-	int index = 0;
-
-	a = count_arg("hola  mundo\n");
-	printf("%d\n", a);
-	printf("index %d\n", index);
-	b = count_letters("hola  mundo	como	asd	s", &index);
-	printf("%d\n", b);
-	printf("index %d\n", index);
-
-	b = count_letters("hola  mundo	como	asd	s", &index);
-	printf("%d\n", b);
-	printf("index %d\n", index);
-	b = count_letters("hola  mundo	como	asd	s", &index);
-	printf("%d\n", b);
-	printf("index %d\n", index);
-	b = count_letters("hola  mundo	como	asd	s", &index);
-
-	printf("%d\n", b);
-	printf("index %d\n", index);
-	b = count_letters("hola  mundo	como	asd	s", &index);
-;
-	printf("%d\n", b);
-	printf("index %d\n", index);
-
-	return (0);
-}
-*/

@@ -1,7 +1,7 @@
  
 #include "shell.h"
 
-char *_geitline(void)
+char *_geiitline(void)
 {
         char buff[SIZE];
 	char *b = buff;

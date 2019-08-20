@@ -4,19 +4,31 @@ int main(void)
 {
 	char *line;
 	char **args;
-	int status, j = 0, fl;
+	int status = 1, j = 0, i;
 
 	while (status)
 	{
-		fl = 0;
-		line = _getline(&fl);
-		args = _strtok(line, &j);
-		status = execute(args);
-
+		line = read_line();
+		if (line[0] == '\n')
+		{
+			free(line);
+			continue;
+		}
 		j = 0;
-		free(line);
-		free(*args);
-		free(args);
+		args = _strtok(line, &j);
+		check_case(args, line);
+		status = execute(args);
+		i = 0;
+		while (args[i] != NULL)
+		{
+			if (args[i])
+				free(args[i]);
+			i++;
+		}
+		if (line != NULL)
+			free(line);
+		if (args != NULL)
+			free(args);
 
 	}
 	return(0);

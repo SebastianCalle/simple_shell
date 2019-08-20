@@ -1,27 +1,26 @@
 #include "shell.c"
 #define BUFFER 1024
 
-char *_getline(int *fl)
+void _getline(char *buf)
 {
 	int f = 1;
 	ssize_t i = 0;
 	int bufsize = BUFFER;
-	char *buf = malloc(sizeof(char) * bufsize);
+	buf = malloc(sizeof(char) * bufsize);
 
-	if (*fl == 1)
-	{
-		free(buf);
-		return(NULL);
-	}
 	if (!buf)
-		return (NULL);
+	{
+		perror("Allocation error\n");
+		exit(99);
+	}
 	while (f)
 	{
 		i = read(STDIN_FILENO, buf, BUFFER);
 		if (i == -1)
 		{
 			free(buf);
-			return (NULL);
+			perror("Read lecture error\n");
+			exit(95);
 		}
 		if (i >= bufsize)
 		{
@@ -29,13 +28,12 @@ char *_getline(int *fl)
 			buf = realloc(buf, bufsize);
 			if (!buf)
 			{
-				fprintf(stderr, "s: allocation error\n");
-				exit(EXIT_FAILURE);
+				perror("Allocation error\n");
+				exit(99);
 			}
 		}
 		if (i < BUFFER)
 			f = 0;
 	}
 	buf[i-1] = '\0';
-	return (buf);
 }

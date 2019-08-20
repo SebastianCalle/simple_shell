@@ -26,6 +26,8 @@ char **_strtok(char *buffer, int *n)
 		in = index;
 		while(k < cl)
 		{
+			if (buffer[in] == '\n')
+				break;
 			args[j][k] = buffer[in];
 			k++;
 			in++;
@@ -35,17 +37,3 @@ char **_strtok(char *buffer, int *n)
 	*n = j;
 	return (args);
 }
-/*
-int main(void)
-{
-	char *str = "Hola  mundo	hola      ";
-	char **arg;
-
-	arg = _strtok(str);
-	
-
-
-	return (0);
-	
-}
-*/
