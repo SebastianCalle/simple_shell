@@ -3,11 +3,11 @@
 int execute(char **args)
 {
 	pid_t pid;
-	int status;
+	int status, i;
 
 	pid = fork();
 	if (pid == 0) {
-		if (execvp(args[0], args) == -1) {
+		if ((i = _proexec(args)) == -1) {
 			perror("sh");
 		}
 		exit(EXIT_FAILURE);
