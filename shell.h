@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/wait.h>
+#include <signal.h>
 //typedef node_s
 //	char *s;
 //	struct node_s *next;
@@ -22,4 +23,8 @@ void _getline(char *buf);
 char *lsh_read_line(void);
 int _strcmp(char *s1, char *s2);
 void check_case(char **args, char *line);
+void _puts(char *str);
+int _putchar(char c);
+void signal_h(void);
+void sig_catch(int sig);
 #endif

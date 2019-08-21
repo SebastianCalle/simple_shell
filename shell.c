@@ -1,5 +1,4 @@
 #include "shell.h"
-
 //void prompt(void)
 //{
 //
@@ -11,10 +10,10 @@ int main(void)
 	char **args;
 	int status = 1, j = 0, i;
 
-
 	while (status)
 	{
-		write(1, "$ ", 2);
+		signal_h();
+		_puts("(o-o) ");
 		line = read_line();
 		if (line[0] == '\n')
 		{
