@@ -6,7 +6,9 @@
 #include <string.h>
 #include <stdlib.h>
 #include <sys/wait.h>
+#include <fcntl.h>
 #include <unistd.h>
+extern char **environ;
 //typedef node_s
 //	char *s;
 //	struct node_s *next;
@@ -22,5 +24,8 @@ int _getchar(void);
 void _getline(char *buf);
 char *lsh_read_line(void);
 int _strcmp(char *s1, char *s2);
-void check_case(char **args, char *line);
+int check_case(char **args, char *line);
+int env(void);
+int printfile(char *filename);
+
 #endif

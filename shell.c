@@ -4,8 +4,9 @@ int main(void)
 {
 	char *line;
 	char **args;
-	int status = 1, j = 0, i;
+	int status = 1, j = 0, i, c = 0;
 
+	env();
 	while (status)
 	{
 		line = read_line();
@@ -16,7 +17,9 @@ int main(void)
 		}
 		j = 0;
 		args = _strtok(line, &j);
-		check_case(args, line);
+		c = check_case(args, line);
+		if(c == 1)
+			continue;
 		status = execute(args);
 		i = 0;
 		while (args[i] != NULL)
