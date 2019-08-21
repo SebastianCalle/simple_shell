@@ -6,18 +6,22 @@ int execute(char **args)
 	int status = 1;
 
 	pid = fork();
-	if (pid == 0) {
-		if (execve(args[0], args, NULL) == -1) {
+	if (pid == 0) 
+	{
+		if (execve(args[0], args, NULL) == -1) 
+		{
 			perror("sh");
 		}
 		free(args[0]);
-		exit(EXIT_FAILURE);
-	} else if (pid < 0) {
+		exit(99);
+	}
+	else if (pid < 0)
+	{
 		perror("sh");
-	} else {
-		while (!WIFEXITED(status) && !WIFSIGNALED(status)){
-			waitpid(pid, &status, WUNTRACED);
-		}
+	}
+	else 
+	{
+		waitpid(pid, &status, WUNTRACED);
 	}
 
 	return (1);
