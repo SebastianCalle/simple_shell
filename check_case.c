@@ -1,7 +1,7 @@
 #include "shell.h"
 
 
-void check_case(char **args, char *line)
+int check_case(char **args, char *line)
 {
 	if (_strcmp(args[0], "exit") == 0)
 	{
@@ -10,5 +10,11 @@ void check_case(char **args, char *line)
 		free(args);
 		exit(0);
 	}
+	else if (_strcmp(args[0], "env") == 0)
+	{
+		
+		printfile(args[0]);
+		return(1);
+	}
+	return(0);
 }
-
