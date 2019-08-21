@@ -1,4 +1,4 @@
-#include "shell.c"
+#include "shell.h"
 
 int execute(char **args)
 {
@@ -7,7 +7,7 @@ int execute(char **args)
 
 	pid = fork();
 	if (pid == 0) {
-		if (execve(args[0], args, NULL) == -1) {
+		if ((_proexec(args)) == -1) {
 			perror("sh");
 		}
 		exit(EXIT_FAILURE);

@@ -1,4 +1,4 @@
-#include "shell.c"
+#include "shell.h"
 #define BUFFER 1024
 
 void _getline(char *buf)

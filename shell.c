@@ -5,7 +5,6 @@ int main(void)
 	char *line;
 	char **args;
 	int status = 1, j = 0, i, c = 0;
-
 	env();
 	while (status)
 	{

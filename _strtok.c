@@ -1,4 +1,4 @@
-#include "shell.c"
+#include "shell.h"
 #define LSH_TOK_BUFSIZE 1024
 #define LSH_TOK_DELIM " \t\r\n\a"
 char **_sstrtok(char *line, int *j)
