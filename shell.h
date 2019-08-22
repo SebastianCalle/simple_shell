@@ -16,12 +16,18 @@
 //	struct node_s *next;
 //} node_t;
 extern char **environ;
+typedef struct env_list
+{
+	char *s;
+	struct env_list *next;
+} env_l;
 
 char *_getenv(char *env);
 int _strlen(char *s);
-void _strcpy(char **s1, char *s2, int n);
+void _strcpy(char *s1, char *s2, int n);
 int _strcmp(char *s1, char *s2);
 char *_strcat(char *dest, char *src);
+char *_strdup(char *str);
 int _proexec(char **argv);
 void sh_loop(void);
 char *read_line(void);
@@ -41,5 +47,9 @@ void _puts(char *str);
 int _putchar(char c);
 void signal_h(void);
 void sig_catch(int sig);
+env_l *_add_node_end(env_l **head, char *str);
+void _free_list(env_l *head);
+int _print_list(env_l *head);
+void *_listed_env(env_l **head);
 
 #endif
