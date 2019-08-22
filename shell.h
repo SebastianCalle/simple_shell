@@ -50,6 +50,7 @@ void sig_catch(int sig);
 env_l *_add_node_end(env_l **head, char *str);
 void _free_list(env_l *head);
 int _print_list(env_l *head);
-void *_listed_env(env_l **head);
+void _listed_env(env_l **head);
+env_l *_findenv(env_l **head, char *name);
 
 #endif
