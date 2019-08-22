@@ -8,7 +8,7 @@
 int check_del(char c, char b)
 {
 	int i;
-	const char *del = " \t\r\a\0";
+	const char *del = ": \t\r\a\0";
 
 	for (i = 0; del[i]; i++)
 	{
@@ -27,7 +27,7 @@ int check_del(char c, char b)
 int count_letters(char *str, int *index, int *l)
 {
 	int c = 0, flag = 0, j, i;
-	const char *del = " \t\r\a\0\n";
+	const char *del = ": \t\r\a\0\n";
 
 	i = *l;
 cont:
@@ -41,6 +41,11 @@ cont:
 				flag = 1;
 				if (i > 0)
 					c++;
+			}
+			else
+			{
+				i++;
+				goto cont;
 			}
 		}
 		j = 0;

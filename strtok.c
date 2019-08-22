@@ -19,6 +19,8 @@ char **_strtok(char *buffer, int *n)
 	for (j = *n; j < a; j++)
 	{
 		cl = count_letters(buffer, &index, &i);
+		if (cl == 0)
+			continue;
 		args[j] = malloc(sizeof(char) * (cl + 1));
 		if (args[j] == NULL)
 			return (NULL);

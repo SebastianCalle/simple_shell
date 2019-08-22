@@ -10,13 +10,16 @@ int execute(char **args)
 		if ((_proexec(args)) == -1) {
 			perror("sh");
 		}
-		exit(EXIT_FAILURE);
-	} else if (pid < 0) {
+		free(args[0]);
+		exit(99);
+	}
+	else if (pid < 0)
+	{
 		perror("sh");
-	} else {
-		while (!WIFEXITED(status) && !WIFSIGNALED(status)){
-			waitpid(pid, &status, WUNTRACED);
-		}
+	}
+	else
+	{
+		waitpid(pid, &status, WUNTRACED);
 	}
 
 	return (1);

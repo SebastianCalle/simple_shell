@@ -1,13 +1,19 @@
 #include "shell.h"
-
+//void prompt(void)
+//{
+//
+//	write(1, "$ ", 2);
+//}
 int main(void)
 {
 	char *line;
 	char **args;
-	int status = 1, j = 0, i, c = 0;
+	int status = 1, j = 0, i;
 	env();
 	while (status)
 	{
+		signal_h();
+		_puts("(o-o) ");
 		line = read_line();
 		if (line[0] == '\n')
 		{
@@ -16,9 +22,7 @@ int main(void)
 		}
 		j = 0;
 		args = _strtok(line, &j);
-		c = check_case(args, line);
-		if(c == 1)
-			continue;
+		check_case(args, line);
 		status = execute(args);
 		i = 0;
 		while (args[i] != NULL)
@@ -32,6 +36,7 @@ int main(void)
 		if (args != NULL)
 			free(args);
 
+//		prompt();
 	}
 	return(0);
 }
