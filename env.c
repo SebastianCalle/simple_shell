@@ -8,7 +8,7 @@ int env(void)
         if (environ == NULL)
                 return (-1);
 
-        fd = open(filename, O_CREAT | O_WRONLY | O_EXCL, 0666);
+        fd = open(filename, O_CREAT | O_WRONLY | O_TRUNC, 0666);
         if (fd == -1)
                 return (-1);
 
