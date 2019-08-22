@@ -24,7 +24,7 @@ typedef struct env_list
 
 char *_getenv(char *env);
 int _strlen(char *s);
-void _strcpy(char *s1, char *s2, int n);
+void *_memcpy(char *dest, char *src, int n);
 int _strcmp(char *s1, char *s2);
 char *_strcat(char *dest, char *src);
 char *_strdup(char *str);
