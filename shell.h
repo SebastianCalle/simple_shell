@@ -21,6 +21,7 @@ typedef struct env_list
 	char *s;
 	struct env_list *next;
 } env_l;
+env_l *environ_s;
 
 char *_getenv(char *env);
 int _strlen(char *s);
@@ -50,7 +51,11 @@ void sig_catch(int sig);
 env_l *_add_node_end(env_l **head, char *str);
 void _free_list(env_l *head);
 int _print_list(env_l *head);
-void _listed_env(env_l **head);
-env_l *_findenv(env_l **head, char *name);
+void _listed_env(void);
+int _find_node(env_l **head, char *name);
+int _setenv(char *name, char *value);
+int _remove_node(env_l **head, int idx);
+env_l *_add_node_idx(env_l **head, char * str, int idx);
+int _unsetenv(char *name);
 
 #endif
