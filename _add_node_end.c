@@ -1,11 +1,11 @@
 #include "shell.h"
 
-env_l *_add_node_end(env_l **head, char *str)
+node_t *_add_node_end(node_t **head, char *str)
 {
-	env_l *new = NULL;
-	env_l *last = NULL;
+	node_t *new = NULL;
+        node_t *last = NULL;
 
-	new = malloc(sizeof(env_l));
+	new = malloc(sizeof(node_t));
 	if (new == NULL)
 		return (NULL);
 

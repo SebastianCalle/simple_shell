@@ -1,8 +1,8 @@
 #include "shell.h"
 
-void _free_list(env_l *head)
+void _free_list(node_t *head)
 {
-	env_l *ptr;
+        node_t *ptr;
 
 	while (head)
 	{

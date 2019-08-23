@@ -1,8 +1,8 @@
 #include "shell.h"
 
-int _remove_node(env_l **head, int idx)
+int _remove_node(node_t **head, int idx)
 {
-	env_l *temp = (*head), *del;
+	node_t *temp = (*head), *del;
 	int i;
 
 	if (head == NULL || (*head) == NULL || idx < 0)

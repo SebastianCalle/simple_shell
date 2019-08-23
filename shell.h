@@ -16,12 +16,12 @@
 //	struct node_s *next;
 //} node_t;
 extern char **environ;
-typedef struct env_list
+typedef struct node
 {
 	char *s;
-	struct env_list *next;
-} env_l;
-env_l *environ_s;
+	struct node *next;
+} node_t;
+node_t *environ_s;
 
 char *_getenv(char *env);
 int _strlen(char *s);
@@ -48,14 +48,14 @@ void _puts(char *str);
 int _putchar(char c);
 void signal_h(void);
 void sig_catch(int sig);
-env_l *_add_node_end(env_l **head, char *str);
-void _free_list(env_l *head);
-int _print_list(env_l *head);
+node_t *_add_node_end(node_t **head, char *str);
+void _free_list(node_t *head);
+int _print_list(node_t *head);
 void _listed_env(void);
-int _find_node(env_l **head, char *name);
+int _find_node(node_t **head, char *name);
 int _setenv(char *name, char *value);
-int _remove_node(env_l **head, int idx);
-env_l *_add_node_idx(env_l **head, char * str, int idx);
+int _remove_node(node_t **head, int idx);
+node_t *_add_node_idx(node_t **head, char * str, int idx);
 int _unsetenv(char *name);
 
 #endif

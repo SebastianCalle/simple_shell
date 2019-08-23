@@ -1,13 +1,13 @@
 #include "shell.h"
 
-env_l *_add_node_idx(env_l **head, char * str, int idx)
+node_t *_add_node_idx(node_t **head, char * str, int idx)
 {
-	env_l *temp = (*head), *new;
+	node_t *temp = (*head), *new;
 
 	if (head == NULL || (*head) == NULL || str == NULL || idx < 0)
 		return (NULL);
 
-	new = malloc(sizeof(env_l));
+	new = malloc(sizeof(node_t));
 	if (new == NULL)
 		return(NULL);
 

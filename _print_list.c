@@ -1,6 +1,6 @@
 #include "shell.h"
 
-int _print_list(env_l *head)
+int _print_list(node_t *head)
 {
 	int i;
 
