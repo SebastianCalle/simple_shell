@@ -13,6 +13,8 @@ int _proexec(char **argv)
 		status = execve(argv[0], argv, environ);
 		return (status);
 	}
+	else if (_strcmp(argv[0], "env") == 0)
+		return (0);
 	while (tok)
 	{
 		dir = opendir(tok);

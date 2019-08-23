@@ -9,7 +9,8 @@ int main(void)
 	char *line;
 	char **args;
 	int status = 1, j = 0, i;
-	env();
+
+	_listed_env();
 	while (status)
 	{
 		signal_h();
