@@ -1,11 +1,14 @@
 #include "shell.h"
-
-
+/**
+ * check_case - function that check diferents cases
+ * @args: arguments parameter
+ * @line: string parameter
+ */
 void check_case(char **args, char *line)
 {
 	int i;
 
-        if (_strcmp(args[0], "exit") == 0)
+	if (_strcmp(args[0], "exit") == 0)
 	{
 		free(line);
 		free(args[0]);
