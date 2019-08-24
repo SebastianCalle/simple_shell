@@ -2,11 +2,12 @@
 
 int _strlen(char *s)
 {
-	int i;
+	int i = 0;
 
 	if (s == NULL)
 		return (-1);
-	for (i = 0; s[i] != '\0'; i++)
+	for (; s[i]; i++)
 		;
+
 	return (i);
 }

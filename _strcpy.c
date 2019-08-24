@@ -1,10 +1,27 @@
 #include "shell.h"
 
-void _strcpy(char **s1, char *s2, int n)
+/**
+ * _strcpy - Function that copies a string
+ * @dest: copy string
+ * @src: string to be copied
+ * Return: value the pointer
+ */
+char *_strcpy(char *dest, char *src)
 {
-	int i;
+	int i, c = 0;
 
-	for (i = 0; i < n; i++)
-		(*s1)[i] = s2[i];
+	while (1)
+	{
+		if (src[c] == '\0')
+			break;
 
+		c++;
+	}
+
+	for (i = 0; i < c; i++)
+		dest[i] = src[i];
+
+	dest[i] = '\0';
+
+	return (dest);
 }

@@ -35,7 +35,7 @@ cont:
 	{
 		if (flag == 0)
 		{
-			if (str[i] > 32 && str[i] < 126)
+			if (str[i] > 32 && str[i] < 126 && str[i] != ':')
 			{
 				*index = i;
 				flag = 1;
