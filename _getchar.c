@@ -1,5 +1,8 @@
 #include "shell.h"
-
+/**
+ * _getchar - read the line
+ * Return: the character read
+ */
 int _getchar(void)
 {
 	char c;

@@ -1,5 +1,10 @@
 #include "shell.h"
-
+/**
+ * _find_node - search a node for name
+ * @head: head node
+ * @name: name of node to serch
+ * Return: a j if is succes or -1 if not
+ */
 int _find_node(node_t **head, char *name)
 {
 	int i, sw, j;
