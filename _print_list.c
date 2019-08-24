@@ -6,7 +6,8 @@ int _print_list(node_t *head)
 
 	for (i = 0; head; i++)
 	{
-		printf("%s\n", head->s);
+	        _puts(head->s);
+		_putchar(10);
 		head = head->next;
 	}
 

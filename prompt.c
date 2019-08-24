@@ -1,7 +1,7 @@
 #include "shell.h"
 #define BUFFER 1024
 
-void _getline(char *buf)
+void _gettttline(char *buf)
 {
 	int f = 1;
 	ssize_t i = 0;
