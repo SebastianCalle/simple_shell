@@ -20,13 +20,37 @@ int check_del(char c, char b)
 	return (0);
 }
 /**
+ * check_flag - check until the character be a letter
+ * @str: character to verificate
+ * @index: index parameter
+ * @i: count parameter
+ * @c: count letter
+ * Return: 1 if  suscces or 0 if not
+ */
+int check_flag(char str, int *index, int *i, int *c)
+{
+
+	if (str > 32 && str < 126 && str != ':')
+	{
+		*index = *i;
+		if (*i > 0)
+			*c += 1;
+		return (1);
+	}
+	else
+		*i += 1;
+	return (0);
+}
+/**
  * count_letters - count the size of each argument
  * @str: string argument * @index: index of string
+ * @index: index parameter
+ * @l: last parameter
  * Return: the size of each argument
  */
 int count_letters(char *str, int *index, int *l)
 {
-	int c = 0, flag = 0, j, i;
+	int c = 0, flag = 0, flag2, j, i;
 	const char *del = ": \t\r\a\0\n";
 
 	i = *l;
@@ -35,18 +59,10 @@ cont:
 	{
 		if (flag == 0)
 		{
-			if (str[i] > 32 && str[i] < 126 && str[i] != ':')
-			{
-				*index = i;
-				flag = 1;
-				if (i > 0)
-					c++;
-			}
-			else
-			{
-				i++;
+			flag2 = check_flag(str[i], &(*index), &i, &c);
+			if (flag2 == 0)
 				goto cont;
-			}
+			flag = 1;
 		}
 		j = 0;
 		while (del[j])
