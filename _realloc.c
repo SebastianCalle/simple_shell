@@ -1,11 +1,16 @@
 #include "shell.h"
-
+/**
+ * _realloc - function that reallocate memory
+ * @ptr: pointer to do realloc
+ * @size: size of new allocation
+ * Return: the new pointer
+ */
 void *_realloc(void *ptr, int size)
 {
 	char *a;
 	int i;
 
-        if (ptr == NULL)
+	if (ptr == NULL)
 	{
 		a = malloc(size);
 		if (a == NULL)

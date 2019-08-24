@@ -1,9 +1,9 @@
 #include "shell.h"
 /**
  * _strtok - split the string in tokens
- * @str: string to split
- * @delim: character delimitator
- * Return: linked list
+ * @buffer: buffer for tokkenizen
+ * @n: integer parameter
+ * Return: array of pointers
  */
 char **_strtok(char *buffer, int *n)
 {
@@ -26,7 +26,7 @@ char **_strtok(char *buffer, int *n)
 			return (NULL);
 		k = 0;
 		in = index;
-		while(k < cl)
+		while (k < cl)
 		{
 			if (buffer[in] == '\n')
 				break;
