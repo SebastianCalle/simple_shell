@@ -1,5 +1,9 @@
 #include "shell.h"
-
+/**
+ * _getenv - function searches the environment list
+ * @env: variable to find
+ * Return: the buffer
+ */
 char *_getenv(char *env)
 {
 	char *buff;

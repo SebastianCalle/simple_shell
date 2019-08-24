@@ -1,8 +1,12 @@
  #include "shell.h"
-
+/**
+ * _getline - read line from stdin
+ * @buff: buff to modificate
+ * Return: the len of string to read
+ */
 int _getline(char **buff)
 {
-        static char b[SIZE], *ptr;
+	static char b[SIZE], *ptr;
 	int len, i;
 	char c;
 
@@ -26,9 +30,8 @@ int _getline(char **buff)
 		return (-1);
 	for (i = 0; i < SIZE; i++)
 		ptr[i] = 0, (*buff) = 0;
-        //ptr[i] = '\n';
-        *buff = ptr;
-        _strcpy(*buff, b);
+	*buff = ptr;
+	_strcpy(*buff, b);
 
 	return (len);
 }
