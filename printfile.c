@@ -1,9 +1,9 @@
 #include "shell.h"
 
 /**
- * printfile - Function that print an file
- * @filename: Name of the file
- * Return: 0 on Success or -1 if fails
+ * printfile - function that print the file
+ * @filename: name of the file to print
+ * Return: 0 if is suscces
  */
 int printfile(char *filename)
 {

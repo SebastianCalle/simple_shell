@@ -1,9 +1,9 @@
 #include "shell.h"
 
 /**
- * _strlen - Function that calculates the length of string
- * @s: String to be checked
- * Return: The length of string or -1 if it fails
+ * _strlen - function that count the lenght of string
+ * @s: string to count
+ * Return: the size of string
  */
 int _strlen(char *s)
 {

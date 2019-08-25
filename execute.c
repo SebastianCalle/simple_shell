@@ -2,12 +2,13 @@
 /**
  * execute - function that execute the commands
  * @args: commands to execute
+ * @line: line argument
  * Return: 1 if is succes
  */
 int execute(char **args)
 {
 	pid_t pid;
-	int status = 1;
+	int status;
 
 	pid = fork();
 	if (pid == 0)
@@ -23,7 +24,7 @@ int execute(char **args)
 	}
 	else
 	{
-		waitpid(pid, &status, WUNTRACED);
+		waitpid(pid, &status, 0);
 	}
 
 	return (1);

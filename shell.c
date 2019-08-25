@@ -34,10 +34,10 @@ int main(void)
 				free(args[i]);
 			i++;
 		}
-		if (line != NULL)
-			free(line);
 		if (args != NULL)
 			free(args);
+		if (line != NULL)
+			free(line);
 	}
 	return (0);
 }

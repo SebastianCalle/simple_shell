@@ -1,9 +1,9 @@
 #include "shell.h"
 
 /**
- * _unsetenv - Function that unsets an environment variable
- * @name: Name of the environment variable
- * Return: 0 on success or -1 if it fails
+ * _unsetenv - deletes the variable name of the environment
+ * @name: name to delete
+ * Return: 0 if is succes or -1 if not
  */
 int _unsetenv(char *name)
 {

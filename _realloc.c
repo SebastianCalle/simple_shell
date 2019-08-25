@@ -1,10 +1,10 @@
 #include "shell.h"
 
 /**
- * _realloc - Function that reallocated a block of memory
- * @ptr: Pointer of memory to be reallocated
- * @size: New size
- * Return: A new pointer reallocated or NULL if it fails
+ * _realloc - function that reallocate memory
+ * @ptr: pointer to do realloc
+ * @size: size of new allocation
+ * Return: the new pointer
  */
 void *_realloc(void *ptr, int size)
 {

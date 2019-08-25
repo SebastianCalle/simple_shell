@@ -9,13 +9,21 @@ void check_case(char **args, char *line)
 	char *str;
 	int i;
 
-	if (_strcmp(args[0], "exit") == 0)
+	if (strcmp(args[0], "exit") == 0)
 	{
 		free(line);
 		free(args[0]);
 		free(args);
 		_free_list(env_s);
 		_free_list(path_s);
+		if (args[1] != NULL)
+		{
+			if (_isdigit(args[1][0]))
+			{
+				i = _atoi(args[1]);
+				exit(i);
+			}
+		}
 		exit(0);
 	}
 	else if (_strcmp(args[0], "env") == 0)

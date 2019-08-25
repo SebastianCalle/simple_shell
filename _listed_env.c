@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * _listed_env - Function that lists the environ
+ * _listed_env - create a linked list of enviroment
  */
 void _listed_env(void)
 {

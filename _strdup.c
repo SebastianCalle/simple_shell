@@ -1,9 +1,9 @@
 #include "shell.h"
 
 /**
- * _strdup - Function that duplicates a string
- * @str: Pointer string to be duplicate
- * Return: Return the duplicated string or NULL if it fails
+ * _strdup - function that copy string
+ * @str: string to copy
+ * Return: the new string
  */
 char *_strdup(char *str)
 {

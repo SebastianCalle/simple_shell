@@ -1,10 +1,10 @@
 #include "shell.h"
 
 /**
- * _setenv - Function that sets an environment variable
- * @name: Name of the environment variable
- * @value: Value of the environment variable
- * Return: 0 on Success or -1 if it fails
+ * _setenv - define the value of enviroments variables
+ * @name: name parameter
+ * @value: value parameter
+ * Return: 0 if si suscces
  */
 int _setenv(char *name, char *value)
 {

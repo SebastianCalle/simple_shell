@@ -1,9 +1,9 @@
 #include "shell.h"
 
 /**
- * _getline - Function that gets an input line
- * @buff: buffer to be allocated the line
- * Return: the length of line or negative if it fails
+ * _getline - read line from stdin
+ * @buff: buff to modificate
+ * Return: the len of string to read
  */
 int _getline(char **buff)
 {

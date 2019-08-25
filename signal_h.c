@@ -1,9 +1,8 @@
 #include "shell.h"
 
 /**
- * signal_check - function that checks the signal
- * @sig: Signal
- * Return: nothing
+ * signal_check - function that check if the signal correct
+ * @sig: - integer signal
  */
 void signal_check(int sig)
 {

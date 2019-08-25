@@ -1,11 +1,11 @@
 #include "shell.h"
 
 /**
- * _memcpy - Function that copies n bytes of memory
- * @dest: Destiny string
- * @src: Source string
- * @n: Number of bytes
- * Return: a pointer to string
+ * _memcpy - copies n characters from memory src to dest
+ * @dest: string to destine
+ * @src: string source
+ * @n: bytes to copy
+ * Return: pointer to new string
  */
 void *_memcpy(char *dest, char *src, int n)
 {

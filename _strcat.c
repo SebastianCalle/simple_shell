@@ -1,10 +1,10 @@
 #include "shell.h"
 
 /**
- * _strcat - Function that concatenates two strings
- * @dest: Destiny string
- * @src: Source string
- * Return: A concatenate string or NULL if ir fails
+ * _strcat - appends the string
+ * @dest: destine append
+ * @src: source append
+ * Return: destine pointer
  */
 char *_strcat(char *dest, char *src)
 {

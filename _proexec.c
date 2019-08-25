@@ -63,11 +63,11 @@ int _proexec(char **argv)
 					b[i] = 0;
 				b = _strcat(b, temp->s), b = _strcat(b, s);
 				b = _strcat(b, fil->d_name), st = execve(b, argv, environ);
-				closedir(dir), free(b), free(p);
+				closedir(dir), free(b), free(p), free(dir);
 				return (st);
 			}
 		}
 		temp = temp->next;
 	}
-	return (-1);
+	return (0);
 }

@@ -25,6 +25,8 @@ typedef struct node
 } node_t;
 extern node_t *env_s;
 extern node_t *path_s;
+int _isdigit(int c);
+int _atoi(char *s);
 
 int _strlen(char *s);
 void *_memcpy(char *dest, char *src, int n);

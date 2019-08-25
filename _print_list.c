@@ -1,9 +1,8 @@
 #include "shell.h"
-
 /**
- * _print_list - Function that prints a linked list
- * @head: head of linked list
- * Return: The length of linked list on success or -1 if it fails
+ * _print_list - function  that print list
+ * @head: node to print
+ * Return: the number of nodes
  */
 int _print_list(node_t *head)
 {

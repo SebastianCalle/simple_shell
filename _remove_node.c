@@ -1,10 +1,10 @@
 #include "shell.h"
 
 /**
- * _remove_node - Function that removes a node in a linked list
- * @head: head of the linked list
- * @idx: index to be deleted
- * Return: 0 on Success and -1 otherwise
+ * _remove_node - function that remove nodes
+ * @head: head of nodes
+ * @idx: index to remove
+ * Return: 0 if is success
  */
 int _remove_node(node_t **head, int idx)
 {
