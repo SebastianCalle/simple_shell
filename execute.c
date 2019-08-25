@@ -2,19 +2,22 @@
 /**
  * execute - function that execute the commands
  * @args: commands to execute
+ * @line: line argument
  * Return: 1 if is succes
  */
-int execute(char **args)
+int execute(char **args, char *line)
 {
 	pid_t pid;
-	int status = 1;
+	int status;
 
 	pid = fork();
 	if (pid == 0)
 	{
 		if ((_proexec(args)) == -1)
+		{
+			free(line);
 			perror("sh");
-		free(args[0]);
+		}
 		exit(99);
 	}
 	else if (pid < 0)
@@ -23,7 +26,7 @@ int execute(char **args)
 	}
 	else
 	{
-		waitpid(pid, &status, WUNTRACED);
+		waitpid(pid, &status, 0);
 	}
 
 	return (1);

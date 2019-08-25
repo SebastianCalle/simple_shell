@@ -44,7 +44,7 @@ int count_letters(char *str, int *index, int *i);
 int check_del(char c, char b);
 int count_arg(char *str);
 char **_strtok(char *buffer, int *j);
-int execute(char **args);
+int execute(char **args, char *line);
 int _getchar(void);
 int _getline(char **buf);
 char *lsh_read_line(void);
