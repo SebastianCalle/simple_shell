@@ -1,9 +1,8 @@
 #include "shell.h"
-//void prompt(void)
-//{
-//
-//	write(1, "$ ", 2);
-//}
+/**
+ * main - entry point function
+ * Return: 0 if suscces
+ */
 int main(void)
 {
 	char *line;
@@ -37,7 +36,6 @@ int main(void)
 		if (args != NULL)
 			free(args);
 
-//		prompt();
 	}
-	return(0);
+	return (0);
 }

@@ -1,5 +1,8 @@
 #include "shell.h"
-
+/**
+ * signal_check - function that check if the signal correct
+ * @sig: - integer signal
+ */
 void signal_check(int sig)
 {
 	if (sig == SIGINT)
@@ -7,7 +10,7 @@ void signal_check(int sig)
 }
 
 /**
- * set_to_catch - change signal to be caught
+ * signal_h - change signal to be caught
  * Return: nothing
  */
 void signal_h(void)

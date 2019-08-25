@@ -1,5 +1,9 @@
 #include "shell.h"
-
+/**
+ * _strdup - function that copy string
+ * @str: string to copy
+ * Return: the new string
+ */
 char *_strdup(char *str)
 {
 	int len;

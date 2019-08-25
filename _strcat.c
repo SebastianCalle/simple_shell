@@ -1,5 +1,10 @@
 #include "shell.h"
-
+/**
+ * _strcat - appends the string
+ * @dest: destine append
+ * @src: source append
+ * Return: destine pointer
+ */
 char *_strcat(char *dest, char *src)
 {
 	int i, j, k, l;

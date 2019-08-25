@@ -1,5 +1,10 @@
 #include "shell.h"
-
+/**
+ * _setenv - define the value of enviroments variables
+ * @name: name parameter
+ * @value: value parameter
+ * Return: 0 if si suscces
+ */
 int _setenv(char *name, char *value)
 {
 	int idx;
@@ -7,15 +12,15 @@ int _setenv(char *name, char *value)
 
 	str = malloc(_strlen(name) + _strlen(value) + 2);
 	if (str == NULL)
-		return(-1);
+		return (-1);
 
 	str[0] = '\0';
 
 	str = _strcat(str, s1);
 	str = _strcat(str, s2);
 	str = _strcat(str, s3);
-
-	if ((idx = _find_node(&environ_s, name)) != -1)
+	idx = _find_node(&environ_s, name);
+	if (idx != -1)
 	{
 		_remove_node(&environ_s, idx);
 		_add_node_idx(&environ_s, str, idx);
