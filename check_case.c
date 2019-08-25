@@ -15,9 +15,14 @@ void check_case(char **args, char *line)
 		free(args);
 		_free_list(environ_s);
 		_free_list(path_s);
+		if (_isdigit(args[1][0]))
+		{
+			i = _atoi(args[1]);
+			exit(i);
+		}
 		exit(0);
 	}
-	else if (_strcmp(args[0], "env") == 0)
+	else if (_strcmp(args[0], "env") == 1)
 		_print_list(environ_s);
 	else if (_strcmp(args[0], "setenv") == 0)
 	{

@@ -11,6 +11,7 @@
 #include <dirent.h>
 #include <sys/wait.h>
 #include <signal.h>
+#include <ctype.h>
 //typedef node_s
 //	char *s;
 //	struct node_s *next;
@@ -25,6 +26,8 @@ node_t *environ_s;
 extern node_t *environ_s;
 node_t *path_s;
 extern node_t *path_s;
+int _isdigit(int c);
+int _atoi(char *s);
 
 char *_getenv(char *env);
 int _strlen(char *s);
