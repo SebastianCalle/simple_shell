@@ -1,5 +1,10 @@
 #include "shell.h"
 
+/**
+ * printfile - Function that print an file
+ * @filename: Name of the file
+ * Return: 0 on Success or -1 if fails
+ */
 int printfile(char *filename)
 {
 	int fd, rd;
@@ -17,14 +22,3 @@ int printfile(char *filename)
 
 	return (0);
 }
-/*
-int main(int argc, char **argv)
-{
-	if (argc > 3)
-		return (1);
-
-	printfile(argv[1]);
-
-	return (0);
-}
-*/

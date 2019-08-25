@@ -1,9 +1,11 @@
 #include "shell.h"
-//void prompt(void)
-//{
-//
-//	write(1, "$ ", 2);
-//}
+
+node_t *env_s;
+node_t *path_s;
+/**
+ * main - Entry point
+ * Return: 0 on success and diferrent of 0 otherwise
+ */
 int main(void)
 {
 	char *line;
@@ -36,8 +38,6 @@ int main(void)
 			free(line);
 		if (args != NULL)
 			free(args);
-
-//		prompt();
 	}
-	return(0);
+	return (0);
 }

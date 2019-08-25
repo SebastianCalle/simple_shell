@@ -7,7 +7,8 @@
  */
 int _cd(char *dir)
 {
-	char *pwd = _getenv("PWD"), *opwd = _getenv("OLDPWD"), *home = _getenv("HOME");
+	char *pwd = _getenv("PWD"), *opwd = _getenv("OLDPWD");
+	char *home = _getenv("HOME");
 	char a[100];
 
 	if (_strcmp(dir, "-") == 0)
@@ -30,7 +31,7 @@ int _cd(char *dir)
 	}
 	else if (chdir(dir) == -1)
 	{
-		perror("directory not found\n");
+		perror("./hsh: 1");
 		free(pwd), free(opwd), free(home);
 		return (-1);
 	}

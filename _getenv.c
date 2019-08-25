@@ -1,25 +1,15 @@
 #include "shell.h"
-/*
-int main(void)
-{
-	char *a;
 
-	_add_node_end(&env_s, "HOLA=HUGO");
-	a = _getenv("HOLA");
-	printf("%s\n", a);
-
-	return (0);
-	}*/
-/*
+/**
  * _getenv - Function that finds an enviroment variable in our env
  * @env: String to be searched
  * Return: An string if it finds or NULL otherwise
  */
 char *_getenv(char *env)
 {
+	node_t *temp = env_s;
 	char *buff;
 	int i, j, k = 0;
-	node_t *temp = env_s;
 
 	while (temp)
 	{
@@ -38,9 +28,8 @@ char *_getenv(char *env)
 			break;
 		else if (temp->next == NULL)
 			return (NULL);
-	        temp = temp->next;
+		temp = temp->next;
 	}
-
 	if (k != 1)
 		return (NULL);
 
@@ -49,7 +38,10 @@ char *_getenv(char *env)
 
 	buff = malloc(sizeof(char) * (i + 1));
 	if (buff == NULL)
+	{
+		write(STDERR_FILENO, "Cannot allocate memory\n", 24);
 		return (NULL);
+	}
 
 	for (k = 0; j <= i; j++, k++)
 		buff[k] = temp->s[j];

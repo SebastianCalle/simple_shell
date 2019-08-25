@@ -1,35 +1,41 @@
 #include "shell.h"
-#define LSH_TOK_BUFSIZE 1024
-#define LSH_TOK_DELIM " \t\r\n\a"
-char **_sstrtok(char *line, int *j)
+/**
+ * _strtok - split the string in tokens
+ * @buffer: string to split
+ * @n: Number of arguments
+ * Return: A multidimensional array
+ */
+char **_strtok(char *buffer, int *n)
 {
-	int bufsize = LSH_TOK_BUFSIZE, position = 0;
-	char **tokens = malloc(bufsize * sizeof(char*));
-	char *token;
-	int i = *j;
+	char **args = NULL;
+	int a = 0, cl = 0, k, in, j;
+	int index = 0, i = 0;
 
-	if (!tokens) {
-		fprintf(stderr, "sh: allocation error\n");
-		exit(EXIT_FAILURE);
-		i++;
-	}
-
-	token = strtok(line, LSH_TOK_DELIM);
-	while (token != NULL) {
-		tokens[position] = token;
-		position++;
-
-		if (position >= bufsize) {
-			bufsize += LSH_TOK_BUFSIZE;
-			tokens = realloc(tokens, bufsize * sizeof(char*));
-			if (!tokens) {
-				fprintf(stderr, "lsh: allocation error\n");
-				exit(EXIT_FAILURE);
-			}
+	a = count_arg(buffer);
+	args = malloc(sizeof(char *) * (a + 1));
+	if (args == NULL)
+		return (NULL);
+	args[a] = NULL;
+	for (j = *n; j < a; j++)
+	{
+		cl = count_letters(buffer, &index, &i);
+		if (cl == 0)
+			continue;
+		args[j] = malloc(sizeof(char) * (cl + 1));
+		if (args[j] == NULL)
+			return (NULL);
+		k = 0;
+		in = index;
+		while (k < cl)
+		{
+			if (buffer[in] == '\n')
+				break;
+			args[j][k] = buffer[in];
+			k++;
+			in++;
 		}
-
-		token = strtok(NULL, LSH_TOK_DELIM);
+		args[j][k] = '\0';
 	}
-	tokens[position] = NULL;
-	return tokens;
+	*n = j;
+	return (args);
 }

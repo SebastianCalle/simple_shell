@@ -25,7 +25,7 @@ void check_case(char **args, char *line)
 		for (i = 0; args[i]; i++)
 			;
 		if (i != 3)
-			perror("sh");
+		        write(STDERR_FILENO, "./hsh: 1: Number of arguments is wrong\n", 39);
 		else
 			_setenv(args[1], args[2]);
 	}
@@ -34,7 +34,7 @@ void check_case(char **args, char *line)
 		for (i = 0; args[i]; i++)
 			;
 		if (i != 2)
-			perror("sh");
+			write(STDERR_FILENO, "./hsh: 1: Number of arguments is wrong\n", 39);
 		else
 			_unsetenv(args[1]);
 	}
@@ -43,15 +43,16 @@ void check_case(char **args, char *line)
 		for (i = 0; args[i]; i++)
 			;
 		if (i != 2)
-			perror("sh");
+			write(STDERR_FILENO, "./hsh: 1: Number of arguments is wrong\n", 39);
 		else
 		{
-			if ((str = _getenv(args[1])) == NULL)
+			str = _getenv(args[1]);
+			if (str == NULL)
 			{
-				perror("environment variable not found\n");
+				perror("./hsh: 1");
 				return;
 			}
-			printf("%s\n", str);
+			_puts(str), _putchar(10);;
 			free(str);
 		}
 	}
@@ -60,7 +61,7 @@ void check_case(char **args, char *line)
 		for (i = 0; args[i]; i++)
 			;
 		if (i > 2)
-			perror("sh");
+			write(STDERR_FILENO, "./hsh: 1: Number of arguments is wrong\n", 39);
 		else
 			_cd(args[1]);
 	}

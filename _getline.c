@@ -1,8 +1,13 @@
- #include "shell.h"
+#include "shell.h"
 
+/**
+ * _getline - Function that gets an input line
+ * @buff: buffer to be allocated the line
+ * Return: the length of line or negative if it fails
+ */
 int _getline(char **buff)
 {
-        static char b[SIZE], *ptr;
+	static char b[SIZE], *ptr;
 	int len, i;
 	char c;
 
@@ -12,7 +17,9 @@ int _getline(char **buff)
 	for (i = 0; (c = _getchar()) != '\n'; i++)
 	{
 		if (c == EOF)
+		{
 			return (-1);
+		}
 		b[i] = c;
 	}
 	b[i] = '\n';
@@ -23,12 +30,13 @@ int _getline(char **buff)
 
 	ptr = _realloc(*buff, SIZE);
 	if (ptr == NULL)
+	{
 		return (-1);
+	}
 	for (i = 0; i < SIZE; i++)
 		ptr[i] = 0, (*buff) = 0;
-        //ptr[i] = '\n';
-        *buff = ptr;
-        _strcpy(*buff, b);
+	*buff = ptr;
+	_strcpy(*buff, b);
 
 	return (len);
 }

@@ -1,4 +1,5 @@
 #include "shell.h"
+
 /**
  * _add_node_end - function that add node at the end
  * @head: first parameter
@@ -10,9 +11,14 @@ node_t *_add_node_end(node_t **head, char *str)
 	node_t *new = NULL;
 	node_t *last = NULL;
 
+	if (str == NULL)
+		str = "";
+
 	new = malloc(sizeof(node_t));
 	if (new == NULL)
+	{
 		return (NULL);
+	}
 
 	new->s = _strdup(str);
 	new->next = NULL;

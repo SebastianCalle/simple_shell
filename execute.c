@@ -13,7 +13,7 @@ int execute(char **args)
 	if (pid == 0)
 	{
 		if ((_proexec(args)) == -1)
-			perror("sh");
+			write(STDERR_FILENO, "./hsh: 1: No such file or directory\n", 36);
 		free(args[0]);
 		exit(99);
 	}

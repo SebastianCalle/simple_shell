@@ -1,5 +1,11 @@
 #include "shell.h"
 
+/**
+ * _remove_node - Function that removes a node in a linked list
+ * @head: head of the linked list
+ * @idx: index to be deleted
+ * Return: 0 on Success and -1 otherwise
+ */
 int _remove_node(node_t **head, int idx)
 {
 	node_t *temp = (*head), *del;

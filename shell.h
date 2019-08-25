@@ -11,19 +11,19 @@
 #include <dirent.h>
 #include <sys/wait.h>
 #include <signal.h>
-//typedef node_s
-//	char *s;
-//	struct node_s *next;
-//} node_t;
 extern char **environ;
+
+/**
+ * struct node - Node of the linked list
+ * @s: String of the struct
+ * @next: Next node
+ */
 typedef struct node
 {
 	char *s;
 	struct node *next;
 } node_t;
-node_t *env_s;
 extern node_t *env_s;
-node_t *path_s;
 extern node_t *path_s;
 
 int _strlen(char *s);
@@ -62,7 +62,7 @@ void _listed_env(void);
 int _find_node(node_t **head, char *name);
 int _setenv(char *name, char *value);
 int _remove_node(node_t **head, int idx);
-node_t *_add_node_idx(node_t **head, char * str, int idx);
+node_t *_add_node_idx(node_t **head, char *str, int idx);
 int _unsetenv(char *name);
 int _cd(char *dir);
 
