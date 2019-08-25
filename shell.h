@@ -64,5 +64,6 @@ int _setenv(char *name, char *value);
 int _remove_node(node_t **head, int idx);
 node_t *_add_node_idx(node_t **head, char * str, int idx);
 int _unsetenv(char *name);
+int _cd(char *dir);
 
 #endif

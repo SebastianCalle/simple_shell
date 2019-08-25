@@ -19,27 +19,32 @@ char *_getenv(char *env)
 {
 	char *buff;
 	int i, j, k = 0;
+	node_t *temp = env_s;
 
-	while (env_s)
+	while (temp)
 	{
-		if (env_s->s[0] == env[0])
+		if (temp->s[0] == env[0])
 		{
-			for (i = 0; env_s->s[i] != '='; i++)
+			for (i = 0; temp->s[i] != '='; i++)
 			{
-				if (env_s->s[i] != env[i])
+				if (temp->s[i] != env[i])
 					break;
-				if (env_s->s[i + 1] == '=')
+				if (temp->s[i + 1] == '=')
 					k = 1;
 			}
 		}
 		i++;
 		if (k == 1)
 			break;
-		else if (env_s->next == NULL)
+		else if (temp->next == NULL)
 			return (NULL);
+	        temp = temp->next;
 	}
 
-	for (j = i; env_s->s[i]; i++)
+	if (k != 1)
+		return (NULL);
+
+	for (j = i; temp->s[i]; i++)
 		;
 
 	buff = malloc(sizeof(char) * (i + 1));
@@ -47,7 +52,7 @@ char *_getenv(char *env)
 		return (NULL);
 
 	for (k = 0; j <= i; j++, k++)
-		buff[k] = env_s->s[j];
+		buff[k] = temp->s[j];
 
 	return (buff);
 }

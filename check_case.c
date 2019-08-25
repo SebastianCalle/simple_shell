@@ -18,7 +18,7 @@ void check_case(char **args, char *line)
 		_free_list(path_s);
 		exit(0);
 	}
-/*	else if (_strcmp(args[0], "env") == 0)
+	else if (_strcmp(args[0], "env") == 0)
 		_print_list(env_s);
 	else if (_strcmp(args[0], "setenv") == 0)
 	{
@@ -37,7 +37,7 @@ void check_case(char **args, char *line)
 			perror("sh");
 		else
 			_unsetenv(args[1]);
-			}*/
+	}
 	else if (_strcmp(args[0], "getenv") == 0)
 	{
 		for (i = 0; args[i]; i++)
@@ -46,9 +46,22 @@ void check_case(char **args, char *line)
 			perror("sh");
 		else
 		{
-			str = _getenv(args[1]);
+			if ((str = _getenv(args[1])) == NULL)
+			{
+				perror("environment variable not found\n");
+				return;
+			}
 			printf("%s\n", str);
 			free(str);
 		}
+	}
+	else if (_strcmp(args[0], "cd") == 0)
+	{
+		for (i = 0; args[i]; i++)
+			;
+		if (i > 2)
+			perror("sh");
+		else
+			_cd(args[1]);
 	}
 }
