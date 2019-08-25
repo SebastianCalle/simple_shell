@@ -3,8 +3,9 @@
 char *read_line(void)
 {
 	char *line = NULL;
+	size_t i;
 
-	if (_getline(&line) <= 0)
+	if (getline(&line, &i, stdin) <= 0)
 	{
 	if (isatty(STDIN_FILENO) == 1)
 			write(STDOUT_FILENO, "\n", 1);

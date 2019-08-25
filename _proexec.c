@@ -4,22 +4,22 @@ int _proexec(char **argv)
 {
 	struct dirent *fil = NULL;
 	DIR *dir = NULL;
-	int status, i, j, len, y = 0;
+	int status, i, j, k, len, y = 0;
 	node_t *temp = NULL;
-	char *buff, *path = _getenv("PATH"), **tok = _strtok(path, &y), *slash = "/";
+	char *buff, *path = _getenviron("PATH"), **tok = _strtok(path, &y), *slash = "/";
 
-	i = _strcmp(argv[0], "env"), j = _strcmp(argv[0], "setenv");
+	i = _strcmp(argv[0], "env"), j = _strcmp(argv[0], "setenv"), k = _strcmp(argv[0], "getenv");
 	if (argv[0][0] == '/')
 	{
 		status = execve(argv[0], argv, environ);
 		return (status);
 	}
-	else if (i == 0 || j == 0 || _strcmp(argv[0], "unsetenv") == 0)
+	else if (i == 0 || j == 0 || k == 0 || _strcmp(argv[0], "unsetenv") == 0)
 		return (0);
 	for (i = 0; tok[i]; i++)
 	{
 		if (path[0] == ':' && i == 0)
-			_add_node_end(&path_s, _getenv("PWD"));
+			_add_node_end(&path_s, _getenviron("PWD"));
 		_add_node_end(&path_s, tok[i]);
 	}
 	temp = path_s;

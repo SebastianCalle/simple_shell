@@ -1,36 +1,53 @@
 #include "shell.h"
+/*
+int main(void)
+{
+	char *a;
 
+	_add_node_end(&env_s, "HOLA=HUGO");
+	a = _getenv("HOLA");
+	printf("%s\n", a);
+
+	return (0);
+	}*/
+/*
+ * _getenv - Function that finds an enviroment variable in our env
+ * @env: String to be searched
+ * Return: An string if it finds or NULL otherwise
+ */
 char *_getenv(char *env)
 {
 	char *buff;
-	int i, j, k, l, sw;
+	int i, j, k = 0;
 
-	for (i = 0, sw = 0; environ[i]; i++)
+	while (env_s)
 	{
-		if (environ[i][0] == env[0])
+		if (env_s->s[0] == env[0])
 		{
-			for (j = 0; environ[i][j] != '='; j++)
+			for (i = 0; env_s->s[i] != '='; i++)
 			{
-				if (environ[i][j] != env[j])
+				if (env_s->s[i] != env[i])
 					break;
-				if (environ[i][j + 1] == '=')
-					sw = 1;
+				if (env_s->s[i + 1] == '=')
+					k = 1;
 			}
-			j++;
-			if (sw == 1)
-				break;
 		}
+		i++;
+		if (k == 1)
+			break;
+		else if (env_s->next == NULL)
+			return (NULL);
 	}
 
-	for (k = 0; environ[i][k] != '\0'; k++)
+	for (j = i; env_s->s[i]; i++)
 		;
 
-	buff = malloc(sizeof(char) * (k + 1));
+	buff = malloc(sizeof(char) * (i + 1));
 	if (buff == NULL)
 		return (NULL);
 
-	for (l = 0; l <= k; l++, j++)
-		buff[l] = environ[i][j];
+	for (k = 0; j <= i; j++, k++)
+		buff[k] = env_s->s[j];
 
 	return (buff);
 }

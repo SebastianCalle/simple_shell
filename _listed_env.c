@@ -27,6 +27,6 @@ void _listed_env(void)
 
 	for (i = 0; environ[i] != NULL; i++)
 	{
-		_add_node_end(&environ_s, environ[i]);
+		_add_node_end(&env_s, environ[i]);
 	}
 }

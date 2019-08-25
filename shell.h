@@ -21,12 +21,11 @@ typedef struct node
 	char *s;
 	struct node *next;
 } node_t;
-node_t *environ_s;
-extern node_t *environ_s;
+node_t *env_s;
+extern node_t *env_s;
 node_t *path_s;
 extern node_t *path_s;
 
-char *_getenv(char *env);
 int _strlen(char *s);
 void *_memcpy(char *dest, char *src, int n);
 char *_strcpy(char *dest, char *src);
@@ -54,6 +53,8 @@ void _puts(char *str);
 int _putchar(char c);
 void signal_h(void);
 void sig_catch(int sig);
+char *_getenviron(char *env);
+char *_getenv(char *env);
 node_t *_add_node_end(node_t **head, char *str);
 void _free_list(node_t *head);
 int _print_list(node_t *head);

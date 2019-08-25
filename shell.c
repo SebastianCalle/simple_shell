@@ -22,7 +22,7 @@ int main(void)
 			continue;
 		}
 		j = 0;
-		args = _strtok(line, &j);
+		args = strtok(line, &j);
 		check_case(args, line);
 		status = execute(args);
 		i = 0;
