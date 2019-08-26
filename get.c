@@ -4,12 +4,22 @@
  * read_line - read the line of function getline
  * Return: the line to read
  */
-char *read_line(void)
+char *read_line(int *flag)
 {
 	char *line = NULL;
+	int f;
 
-	if (_getline(&line) <= 0)
+	f = _getline(&line);
+
+	if (f <= 0)
 	{
+		if (f == -2)
+		{
+			*flag = 1;
+			fflush(stdin);
+			return (line);
+			
+		}
 		if (isatty(STDIN_FILENO) == 1)
 			write(STDOUT_FILENO, "\n", 1);
 		_free_list(env_s);

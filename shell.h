@@ -37,7 +37,7 @@ char *_strcat(char *dest, char *src);
 char *_strdup(char *str);
 int _proexec(char **argv, char *line);
 void sh_loop(void);
-char *read_line(void);
+char *read_line(int *flag);
 int count_letters(char *str, int *index, int *i);
 int check_del(char c, char b);
 int count_arg(char *str);

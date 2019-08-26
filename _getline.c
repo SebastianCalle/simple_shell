@@ -8,7 +8,7 @@
 int _getline(char **buff)
 {
 	static char b[SIZE], *ptr = NULL;
-	int len, i;
+	int len, i, flag = 0;
 	char c;
 
 //	for (i = 0; i < SIZE; i++)
@@ -17,7 +17,11 @@ int _getline(char **buff)
 	for (i = 0; (c = _getchar()) != '\n'; i++)
 	{
 		if (c == EOF && i > 0)
+		{
+			flag = 1;
 			break;
+
+		}
 		if (c == EOF && i == 0)
 		{
 			return (-1);
@@ -37,5 +41,7 @@ int _getline(char **buff)
 		ptr[i] = 0, (*buff) = 0;
 	*buff = ptr;
 	_strcpy(*buff, b);
+	if (flag == 1)
+		return (-2);
 	return (len);
 }

@@ -10,14 +10,14 @@ int main(void)
 {
 	char *line;
 	char **args;
-	int status = 1, j = 0, i;
+	int status = 1, j = 0, i, flag = 0;
 
 	_listed_env();
 	while (status)
 	{
 		signal_h();
 		_puts("(o-o) ");
-		line = read_line();
+		line = read_line(&flag);
 		if (line[0] == '\n')
 		{
 			free(line);
@@ -38,6 +38,8 @@ int main(void)
 			free(args);
 		if (line != NULL)
 			free(line);
+		if (flag == 1)
+			break;
 	}
 	return (0);
 }
