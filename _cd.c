@@ -11,21 +11,21 @@ int _cd(char *dir)
 	char *home = _getenv("HOME");
 	char a[100];
 
-	if (_strcmp(dir, "-") == 0)
+	if (dir == NULL)
+	{
+		chdir(home);
+		_setenv("OLDPWD", pwd);
+		_setenv("PWD", home);
+		free(pwd), free(opwd), free(home);
+		return (0);
+	}
+	else if (_strcmp(dir, "-") == 0)
 	{
 		chdir(opwd);
 		_setenv("OLDPWD", pwd);
 		_setenv("PWD", opwd);
 		_puts(getcwd(a, 100));
 		_putchar(10);
-		free(pwd), free(opwd), free(home);
-		return (0);
-	}
-	else if (dir == NULL)
-	{
-		chdir(home);
-		_setenv("OLDPWD", pwd);
-		_setenv("PWD", home);
 		free(pwd), free(opwd), free(home);
 		return (0);
 	}

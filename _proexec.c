@@ -1,51 +1,21 @@
 #include "shell.h"
 
 /**
- * _checkexec - Function that checks te arguments or proexec
- * @argv: Multidimensional array to be checked
- * Return: 0 on success or -1 if it fails
+ * temp_function - function that execute the nodes
+ * @temp: node temporal
+ * @status: status of program
+ * @argv: arguments to execute
+ * @path: path of directory
+ * Return: status of program
  */
-int _checkexec(char **argv)
+int temp_function(node_t *temp, int *status, char **argv, char *path)
 {
-	int i, j, k, l, m, status;
-
-	i = _strcmp(argv[0], "env"), j = _strcmp(argv[0], "setenv");
-	k = _strcmp(argv[0], "getenv"), l = _strcmp(argv[0], "cd");
-	m = _strcmp(argv[0], "unsetenv");
-
-	if (argv[0][0] == '/')
-	{
-		status = execve(argv[0], argv, environ);
-		return (status);
-	}
-	else if (i == 0 || j == 0 || k == 0 || m == 0 || l == 0)
-		return (0);
-	return (-1);
-}
-
-/**
- * _proexec - Function that handles the standard input
- * @argv: Multidimensional array of the standard input
- * Return: 0 on success and -1 on failure
- */
-int _proexec(char **argv)
-{
-	struct dirent *fil = NULL;
+	int status2 = *status;
 	DIR *dir = NULL;
-	int st, i, len, y = 0;
-	node_t *temp = NULL;
-	char *b, *p = _getenviron("PATH"), **tok = _strtok(p, &y), *s = "/";
+	struct dirent *fil = NULL;
+	int len, i;
+	char *buff = NULL, *slash = "/";
 
-	st = _checkexec(argv);
-	if (st == 0)
-		return (0);
-	for (i = 0; tok[i]; i++)
-	{
-		if (p[0] == ':' && i == 0)
-			_add_node_end(&path_s, _getenviron("PWD"));
-		_add_node_end(&path_s, tok[i]);
-	}
-	temp = path_s;
 	while (temp)
 	{
 		dir = opendir(temp->s);
@@ -56,18 +26,97 @@ int _proexec(char **argv)
 			if ((_strcmp(fil->d_name, argv[0])) == 0)
 			{
 				len = _strlen(fil->d_name) + _strlen(temp->s) + 3;
-				b = malloc(len);
-				if (b == NULL)
+				buff = malloc(len);
+				if (buff == NULL)
 					return (-1);
 				for (i = 0; i < len; i++)
-					b[i] = 0;
-				b = _strcat(b, temp->s), b = _strcat(b, s);
-				b = _strcat(b, fil->d_name), st = execve(b, argv, environ);
-				closedir(dir), free(b), free(p), free(dir);
-				return (st);
+					buff[i] = 0;
+				buff = _strcat(buff, temp->s), buff = _strcat(buff, slash);
+				buff = _strcat(buff, fil->d_name);
+				status2 = execve(buff, argv, environ);
+				closedir(dir), free(buff), free(path);
+				return (status2);
 			}
 		}
 		temp = temp->next;
+		free(dir);
 	}
 	return (0);
+
+}
+
+/**
+ * free_all - Function that frees the malloc
+ * @argv: Multidimensional string of arguments
+ * @path: Environment path
+ * @tok: Tokens of path
+ * Return: 0 on succes or -1 otherwise
+ */
+int free_all(char **argv, char *path, char **tok)
+{
+	struct stat st;
+	int i;
+
+	if (stat(argv[0], &st) != 0)
+	{ free(path);
+		for (i = 0; tok[i]; i++)
+		{
+			if (tok[i])
+				free(tok[i]);
+		}
+		for (i = 0; argv[i]; i++)
+		{
+			if (argv[i])
+				free(argv[i]);
+		}
+		free(tok);
+		free(argv);
+		_free_list(env_s);
+		_free_list(path_s);
+		return (-1);
+	}
+	return (0);
+}
+
+/**
+ * _proexec - function that execute the arguments
+ * @argv: arguments parameters
+ * Return: status or -1 if not succes
+ */
+int _proexec(char **argv)
+{
+	pid_t pid;
+	int status, i, j, y = 0, k, l, m;
+	node_t *temp = NULL;
+	char *path = _getenv("PATH"), **tok = _strtok(path, &y);
+
+	i = _strcmp(argv[0], "env"), j = _strcmp(argv[0], "setenv");
+	k = _strcmp(argv[0], "getenv"), l = _strcmp(argv[0], "cd");
+	m = _strcmp(argv[0], "unsetenv");
+	if (argv[0][0] == '/')
+	{
+		pid = fork();
+		if (pid == 0)
+		{
+			status = execve(argv[0], argv, environ);
+			return (status);
+		}
+		if (pid < 0)
+			perror("sh:");
+		else
+			waitpid(pid, &status, WUNTRACED);
+	}
+	else if (i == 0 || j == 0 || m == 0 || k == 0 || l == 0)
+		return (0);
+	for (i = 0; tok[i]; i++)
+	{
+		if (path[0] == ':' && i == 0)
+			_add_node_end(&path_s, _getenv("PWD"));
+		_add_node_end(&path_s, tok[i]);
+	}
+	temp = path_s;
+	temp_function(temp, &status, argv, path);
+	free_all(argv, path, tok);
+
+	return (-1);
 }
