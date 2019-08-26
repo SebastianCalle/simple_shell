@@ -38,6 +38,28 @@ void check_case2(char **args)
 	}
 }
 /**
+ * free_all - function that free memory
+ * @args: argumentos to free
+ * @line: string to free
+ */
+void free_all2(char **args, char *line)
+{
+	int i = 0;
+
+	while (args[i])
+	{
+		if (args[i])
+			free(args[i]);
+		i++;
+	}
+	if (args != NULL)
+		free(args);
+	if (line != NULL)
+		free(line);
+	_free_list(env_s);
+	_free_list(path_s);
+}
+/**
  * exit_estatus - check if exit have arguments
  * @args: arguments parameter
  * @line: string parameter
@@ -46,7 +68,7 @@ void exit_estatus(char **args, char *line)
 {
 	int i = 0;
 
-	while (args[i])
+	while (args[i] != NULL)
 		i++;
 	if (i != 2)
 		return;
@@ -55,12 +77,7 @@ void exit_estatus(char **args, char *line)
 		if (_isdigit(args[1][0]))
 		{
 			i = _atoi(args[1]);
-			free(line);
-			free(args[0]);
-			free(args);
-			_free_list(env_s);
-			_free_list(path_s);
-			free(args[1]);
+			free_all2(args, line);
 			exit(i);
 		}
 		else
@@ -76,14 +93,10 @@ void check_case(char **args, char *line)
 {
 	int i;
 
-	exit_estatus(args, line);
 	if (_strcmp(args[0], "exit") == 0)
 	{
-		free(line);
-		free(args[0]);
-		free(args);
-		_free_list(env_s);
-		_free_list(path_s);
+		exit_estatus(args, line);
+		free_all2(args, line);
 		exit(0);
 	}
 	else if (_strcmp(args[0], "env") == 0)

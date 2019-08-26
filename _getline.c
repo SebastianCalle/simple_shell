@@ -7,16 +7,18 @@
  */
 int _getline(char **buff)
 {
-	static char b[SIZE], *ptr;
+	static char b[SIZE], *ptr = NULL;
 	int len, i;
 	char c;
 
-	for (i = 0; i < SIZE; i++)
-		b[i] = 0;
+//	for (i = 0; i < SIZE; i++)
+//		b[i] = 0;
 
 	for (i = 0; (c = _getchar()) != '\n'; i++)
 	{
-		if (c == EOF)
+		if (c == EOF && i > 0)
+			break;
+		if (c == EOF && i == 0)
 		{
 			return (-1);
 		}
@@ -26,9 +28,7 @@ int _getline(char **buff)
 	b[i + 1] = '\0';
 
 	len = _strlen(b);
-	ptr = NULL;
-
-	ptr = _realloc(*buff, SIZE, len);
+	ptr = _realloc(*buff, SIZE);
 	if (ptr == NULL)
 	{
 		return (-1);
@@ -37,6 +37,5 @@ int _getline(char **buff)
 		ptr[i] = 0, (*buff) = 0;
 	*buff = ptr;
 	_strcpy(*buff, b);
-
 	return (len);
 }
