@@ -28,7 +28,7 @@ int _getline(char **buff)
 	len = _strlen(b);
 	ptr = NULL;
 
-	ptr = _realloc(*buff, SIZE);
+	ptr = _realloc(*buff, SIZE, len);
 	if (ptr == NULL)
 	{
 		return (-1);

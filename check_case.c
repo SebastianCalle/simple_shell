@@ -48,21 +48,23 @@ void exit_estatus(char **args, char *line)
 
 	while (args[i])
 		i++;
-	if (i != 1)
+	if (i != 2)
 		return;
 	if (args[1] != NULL)
 	{
 		if (_isdigit(args[1][0]))
 		{
+			i = _atoi(args[1]);
 			free(line);
 			free(args[0]);
 			free(args);
 			_free_list(env_s);
 			_free_list(path_s);
-			i = _atoi(args[1]);
 			free(args[1]);
 			exit(i);
 		}
+		else
+			perror("perra");
 	}
 }
 /**

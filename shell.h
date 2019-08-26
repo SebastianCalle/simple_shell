@@ -48,7 +48,7 @@ int _getline(char **buf);
 char *lsh_read_line(void);
 int _strcmp(char *s1, char *s2);
 int env(void);
-void *_realloc(void *ptr, int size);
+void *_realloc(void *ptr, int size, int oldsize);
 int printfile(char *filename);
 void check_case(char **args, char *line);
 void _puts(char *str);

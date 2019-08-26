@@ -6,11 +6,13 @@
  * @size: size of new allocation
  * Return: the new pointer
  */
-void *_realloc(void *ptr, int size)
+void *_realloc(void *ptr, int size, int oldsize)
 {
 	char *a;
 	int i;
 
+	if (oldsize < size)
+		return (ptr);
 	if (ptr == NULL)
 	{
 		a = malloc(size);
