@@ -107,7 +107,13 @@ int _proexec(char **argv)
 			waitpid(pid, &status, WUNTRACED);
 	}
 	else if (i == 0 || j == 0 || m == 0 || k == 0 || l == 0)
+	{
+		for (i = 0; tok[i]; i++)
+			if (tok[i])
+				free(tok[i]);
+		free(tok), free(path);
 		return (0);
+	}
 	for (i = 0; tok[i]; i++)
 	{
 		if (path[0] == ':' && i == 0)
