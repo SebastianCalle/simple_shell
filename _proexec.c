@@ -1,4 +1,5 @@
 #include "shell.h"
+
 /**
  * temp_function - function that execute the nodes
  * @temp: node temporal
@@ -43,46 +44,13 @@ int temp_function(node_t *temp, int *status, char **argv, char *path)
 	return (0);
 
 }
-/**
- * _proexec - function that execute the arguments
- * @argv: arguments parameters
- * Return: status or -1 if not succes
- */
-int _proexec(char **argv)
+int free_all(char **argv, char *path, char **tok)
 {
-	pid_t pid;
-	int status, i = 0, j, y = 0;
-	node_t *temp = NULL;
-	char *path = _getenv("PATH"), **tok = _strtok(path, &y);
 	struct stat st;
+	int i;
 
-	i = _strcmp(argv[0], "env"), j = _strcmp(argv[0], "setenv");
-	if (argv[0][0] == '/')
-	{
-		pid = fork();
-		if (pid == 0)
-		{
-			status = execve(argv[0], argv, environ);
-			return (status);
-		}
-		if (pid < 0)
-			perror("sh:");
-		else
-			waitpid(pid, &status, WUNTRACED);
-	}
-	else if (i == 0 || j == 0 || _strcmp(argv[0], "unsetenv") == 0)
-		return (0);
-	for (i = 0; tok[i]; i++)
-	{
-		if (path[0] == ':' && i == 0)
-			_add_node_end(&path_s, _getenv("PWD"));
-		_add_node_end(&path_s, tok[i]);
-	}
-	temp = path_s;
-	temp_function(temp, &status, argv, path);
 	if (stat(argv[0], &st) != 0)
-	{
-		free(path);
+	{ free(path);
 		for (i = 0; tok[i]; i++)
 		{
 			if (tok[i])
@@ -99,6 +67,48 @@ int _proexec(char **argv)
 		_free_list(path_s);
 		return (-1);
 	}
+	return (0);
+}	
+
+/**
+ * _proexec - function that execute the arguments
+ * @argv: arguments parameters
+ * Return: status or -1 if not succes
+ */
+int _proexec(char **argv)
+{
+	pid_t pid;
+	int status, i, j, y = 0, k, l, m;
+	node_t *temp = NULL;
+	char *path = _getenv("PATH"), **tok = _strtok(path, &y);
+
+	i = _strcmp(argv[0], "env"), j = _strcmp(argv[0], "setenv");
+	k = _strcmp(argv[0], "getenv"), l = _strcmp(argv[0], "cd");
+	m = _strcmp(argv[0], "unsetenv");
+	if (argv[0][0] == '/')
+	{
+		pid = fork();
+		if (pid == 0)
+		{
+			status = execve(argv[0], argv, environ);
+			return (status);
+		}
+		if (pid < 0)
+			perror("sh:");
+		else
+			waitpid(pid, &status, WUNTRACED);
+	}
+	else if (i == 0 || j == 0 || m == 0 || k == 0 || l == 0)
+		return (0);
+	for (i = 0; tok[i]; i++)
+	{
+		if (path[0] == ':' && i == 0)
+			_add_node_end(&path_s, _getenv("PWD"));
+		_add_node_end(&path_s, tok[i]);
+	}
+	temp = path_s;
+	temp_function(temp, &status, argv, path);
+	free_all(argv, path, tok);
 
 	return (-1);
 }

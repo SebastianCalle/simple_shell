@@ -1,4 +1,7 @@
 #include "shell.h"
+
+node_t *env_s;
+node_t *path_s;
 /**
  * main - entry point function
  * Return: 0 if suscces
