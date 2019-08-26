@@ -4,7 +4,7 @@
  * @args: commands to execute
  * Return: 1 if is succes
  */
-int execute(char **args)
+int execute(char **args, char *line)
 {
 	pid_t pid;
 	int status;
@@ -12,7 +12,7 @@ int execute(char **args)
 	pid = fork();
 	if (pid == 0)
 	{
-		if ((_proexec(args)) == -1)
+		if ((_proexec(args, line)) == -1)
 			write(STDERR_FILENO, "./hsh: 1: No such file or directory\n", 36);
 		exit(99);
 	}

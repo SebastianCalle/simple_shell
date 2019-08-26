@@ -52,7 +52,7 @@ int temp_function(node_t *temp, int *status, char **argv, char *path)
  * @tok: Tokens of path
  * Return: 0 on succes or -1 otherwise
  */
-int free_all(char **argv, char *path, char **tok)
+int free_all(char **argv, char *path, char **tok, char *line)
 {
 	struct stat st;
 	int i;
@@ -70,6 +70,7 @@ int free_all(char **argv, char *path, char **tok)
 				free(argv[i]);
 		}
 		free(tok);
+		free(line);
 		free(argv);
 		_free_list(env_s);
 		_free_list(path_s);
@@ -83,7 +84,7 @@ int free_all(char **argv, char *path, char **tok)
  * @argv: arguments parameters
  * Return: status or -1 if not succes
  */
-int _proexec(char **argv)
+int _proexec(char **argv, char *line)
 {
 	pid_t pid;
 	int status, i, j, y = 0, k, l, m;
@@ -122,7 +123,7 @@ int _proexec(char **argv)
 	}
 	temp = path_s;
 	temp_function(temp, &status, argv, path);
-	free_all(argv, path, tok);
+	free_all(argv, path, tok, line);
 
 	return (-1);
 }

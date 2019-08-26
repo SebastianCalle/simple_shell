@@ -26,7 +26,7 @@ int main(void)
 		j = 0;
 		args = _strtok(line, &j);
 		check_case(args, line);
-		status = execute(args);
+		status = execute(args, line);
 		i = 0;
 		while (args[i] != NULL)
 		{
