@@ -2,7 +2,6 @@
 /**
  * check_case2 - function that check other enviroments
  * @args: arguments parameters
- * @line: string parameter
  */
 void check_case2(char **args)
 {
@@ -47,10 +46,10 @@ void exit_estatus(char **args, char *line)
 {
 	int i = 0;
 
-	while(args[i])
+	while (args[i])
 		i++;
 	if (i != 1)
-		return ;
+		return;
 	if (args[1] != NULL)
 	{
 		if (_isdigit(args[1][0]))
@@ -74,8 +73,8 @@ void exit_estatus(char **args, char *line)
 void check_case(char **args, char *line)
 {
 	int i;
-	exit_estatus(args, line);
 
+	exit_estatus(args, line);
 	if (_strcmp(args[0], "exit") == 0)
 	{
 		free(line);
@@ -92,7 +91,7 @@ void check_case(char **args, char *line)
 		for (i = 0; args[i]; i++)
 			;
 		if (i != 3)
-			perror("sh");
+			write(STDERR_FILENO, "./hsh: 1: Number of arguments is wrong\n", 39);
 		else
 			_setenv(args[1], args[2]);
 	}
@@ -101,7 +100,7 @@ void check_case(char **args, char *line)
 		for (i = 0; args[i]; i++)
 			;
 		if (i != 2)
-			perror("sh");
+			write(STDERR_FILENO, "./hsh: 1: Number of arguments is wrong\n", 39);
 		else
 			_unsetenv(args[1]);
 	}

@@ -2,7 +2,6 @@
 /**
  * execute - function that execute the commands
  * @args: commands to execute
- * @line: line argument
  * Return: 1 if is succes
  */
 int execute(char **args)
