@@ -1,6 +1,6 @@
 # Simple Shell
 
-A shell is a user interface for access to an unix based operative system. This is a simple version of bash written in C Language requested by Holberton School. This project contains several features and prototype functions made by us.
+A shell is a user interface for access to an unix based operative system. This is a simple version of bash written in C Language requested by Holberton School.
 
 ## List of system calls and functions used
 * access (man 2 access)
@@ -27,6 +27,10 @@ A shell is a user interface for access to an unix based operative system. This i
 * strtok (man 3 strtok)
 * wait (man 2 wait
 
+## Description
+
+This shell was mainly developed with fork, execve, wait, getline and strtok. The fork is a system call that creates a new child process by duplicating the parent calling process. These procceses can be separeted and synchronized with wait, a system call that waits until any of its child process completes its execution. The execve function executes the program referred to by path name from the input, received by the getline function and separated by the strtok function to define the arguments.
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
@@ -38,9 +42,11 @@ A Unix-like operating system or by default a virtual machine. You should have gi
 
 ### Installing
 
-- If you don't have a Unix-like operative system you can use a virtual machine that you find is this link: https://www.virtualbox.org/
-- Clone this repo to your local machine using in your terminal`git clone https://github.com/SebastianCalle/simple_shell.git`
-- The shell will be compiled this way: ```gcc -Wall -Werror -Wextra -pedantic *.c -o hsh```
+- If you don't have a Unix-like operative system you can use a virtual machine that you find is this link:<br /> https://www.virtualbox.org/
+- Clone this repo to your local machine using in your terminal:<br />
+`git clone https://github.com/SebastianCalle/simple_shell.git`
+- The shell will be compiled this way:<br />
+```gcc -Wall -Werror -Wextra -pedantic *.c -o hsh```
 
 ### Usage
 
@@ -79,14 +85,15 @@ $ rm
 And more...
 ```
 
-- These are the commands and functions developed by us
+- These are some the main commands and functions developed by us
 
-* strtok
-* getline 
-* env
-* setenv
-* unsetenv
-* rm
+* strtok - Function that stracts tokens from string
+* getline - Function that delimites string input
+* env - Function that shows environ
+* getenv - Function that shows an environment variable
+* setenv - Function that sets an environment variable
+* unsetenv - Function that unsets and environmet variable
+* cd - Function that changes the current directory
 
 ## Authors
 
