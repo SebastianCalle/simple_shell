@@ -1,5 +1,6 @@
 #include "shell.h"
 
+
 /**
  * temp_function - function that execute the nodes
  * @temp: node temporal
@@ -72,7 +73,6 @@ int free_all(char **argv, char *path, char **tok, char *line)
 		free(tok);
 		free(line);
 		free(argv);
-		_free_list(env_s);
 		_free_list(path_s);
 		return (-1);
 	}
@@ -89,7 +89,7 @@ int _proexec(char **argv, char *line)
 	pid_t pid;
 	int status, i, j, y = 0, k, l, m;
 	node_t *temp = NULL;
-	char *path = _getenv("PATH"), **tok = _strtok(path, &y);
+	char *path = _getenviron("PATH"), **tok = _strtok(path, &y);
 
 	i = _strcmp(argv[0], "env"), j = _strcmp(argv[0], "setenv");
 	k = _strcmp(argv[0], "getenv"), l = _strcmp(argv[0], "cd");
@@ -118,7 +118,7 @@ int _proexec(char **argv, char *line)
 	for (i = 0; tok[i]; i++)
 	{
 		if (path[0] == ':' && i == 0)
-			_add_node_end(&path_s, _getenv("PWD"));
+			_add_node_end(&path_s, _getenviron("PWD"));
 		_add_node_end(&path_s, tok[i]);
 	}
 	temp = path_s;

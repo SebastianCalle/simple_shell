@@ -1,6 +1,7 @@
 #ifndef SHELL_H
 #define SHELL_H
 #define SIZE 1024
+#define UN __attribute__((__unused__))
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -23,8 +24,18 @@ typedef struct node
 	char *s;
 	struct node *next;
 } node_t;
-extern node_t *env_s;
+
+//node_t *env_s;
+node_t *path_s;
+//extern node_t *env_s;
 extern node_t *path_s;
+
+typedef struct core
+{
+	char *str;
+	int (*f)(int argc, char *l, char **args, node_t **env_s);
+} core_t;
+
 int _isdigit(int c);
 int _atoi(char *s);
 
@@ -56,16 +67,19 @@ int _putchar(char c);
 void signal_h(void);
 void sig_catch(int sig);
 char *_getenviron(char *env);
-char *_getenv(char *env);
+char *_getenv(char *env, node_t **env_s);
 node_t *_add_node_end(node_t **head, char *str);
 void _free_list(node_t *head);
-int _print_list(node_t *head);
+int _print_list(int argc, char *l, char **args, node_t **head);
 void _listed_env(void);
 int _find_node(node_t **head, char *name);
-int _setenv(char *name, char *value);
+int _setenv(int argc, UN char *l, char **args, node_t **env_s);
+int _setenv1(char *name, char *value, node_t **env_s);
 int _remove_node(node_t **head, int idx);
 node_t *_add_node_idx(node_t **head, char *str, int idx);
-int _unsetenv(char *name);
-int _cd(char *dir);
+int _unsetenv(int argc, UN char *l, char **args, node_t **env_s);
+int _cd(int argc, UN char *l, char **args, node_t **env_s);
+int _exit_shell(int argc, UN char *l, char **args, node_t **env_s);
+int no_found(UN int argc, UN char *l, UN char **args, UN node_t **env_s);
 
 #endif

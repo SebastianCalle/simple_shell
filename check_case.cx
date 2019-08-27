@@ -1,4 +1,6 @@
 #include "shell.h"
+
+static node_t *env_s;
 /**
  * check_case2 - function that check other enviroments
  * @args: arguments parameters
@@ -16,7 +18,7 @@ void check_case2(char **args)
 			write(STDERR_FILENO, "./hsh: 1: Number of arguments is wrong\n", 39);
 		else
 		{
-			str = _getenv(args[1]);
+			str = _getenv(args[1], &env_s);
 			if (str == NULL)
 			{
 				perror("./hsh: 1");
@@ -108,7 +110,7 @@ void check_case(char **args, char *line)
 		if (i != 3)
 			write(STDERR_FILENO, "./hsh: 1: Number of arguments is wrong\n", 39);
 		else
-			_setenv(args[1], args[2]);
+			_setenv(args[1], args[2], &env_s);
 	}
 	else if (_strcmp(args[0], "unsetenv") == 0)
 	{
@@ -117,8 +119,88 @@ void check_case(char **args, char *line)
 		if (i != 2)
 			write(STDERR_FILENO, "./hsh: 1: Number of arguments is wrong\n", 39);
 		else
-			_unsetenv(args[1]);
+			_unsetenv(args[1], &env_s);
 	}
 	check_case2(args);
 
+}
+
+/**
+ * _cd - Function that creates the command cd
+ * @dir: directory to be checked
+ * Return: Always 0 (Success) or -1 otherwise
+ */
+int _cd(char *dir)
+{
+	char *pwd = _getenv("PWD", &env_s), *opwd = _getenv("OLDPWD", &env_s);
+	char *home = _getenv("HOME", &env_s);
+	char a[100];
+
+	if (dir == NULL)
+	{
+		chdir(home);
+		_setenv("OLDPWD", pwd, &env_s);
+		_setenv("PWD", home, &env_s);
+		free(pwd), free(opwd), free(home);
+		return (0);
+	}
+	else if (_strcmp(dir, "-") == 0)
+	{
+		chdir(opwd);
+		_setenv("OLDPWD", pwd, &env_s);
+		_setenv("PWD", opwd, &env_s);
+		_puts(getcwd(a, 100));
+		_putchar(10);
+		free(pwd), free(opwd), free(home);
+		return (0);
+	}
+	else if (chdir(dir) == -1)
+	{
+		perror("./hsh: 1");
+		free(pwd), free(opwd), free(home);
+		return (-1);
+	}
+
+	_setenv("OLDPWD", pwd, &env_s);
+	if (_strcmp(dir, "..") == 0)
+		_setenv("PWD", getcwd(a, 100), &env_s);
+	else
+		_setenv("PWD", dir, &env_s);
+
+	free(pwd), free(opwd), free(home);
+	return (0);
+}
+
+/**
+ * read_line - read the line of function getline
+ * Return: the line to read
+ */
+char *read_line(void)
+{
+	char *line = NULL;
+
+	if (_getline(&line) <= 0)
+	{
+		if (isatty(STDIN_FILENO) == 1)
+			write(STDOUT_FILENO, "\n", 1);
+		_free_list(env_s);
+		_free_list(path_s);
+		free(line);
+		exit(98);
+	}
+	fflush(stdin);
+	return (line);
+}
+
+/**
+ * _listed_env - create a linked list of enviroment
+ */
+void _listed_env(void)
+{
+	int i;
+
+	for (i = 0; environ[i] != NULL; i++)
+	{
+		_add_node_end(&env_s, environ[i]);
+	}
 }

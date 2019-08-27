@@ -1,21 +1,25 @@
 #include "shell.h"
+
 /**
  * _print_list - function  that print list
- * @head: node to print
+ * @argc: Number of arguments
+ * @args: Multidimensional array of arguments
+ * @head: Head of the linked list
  * Return: the number of nodes
  */
-int _print_list(node_t *head)
+int _print_list(UN int argc, UN char *l, UN char **args, node_t **head)
 {
 	int i;
+	node_t *temp = *head;
 
-	if (head == NULL)
+	if (temp == NULL)
 		return (-1);
 
-	for (i = 0; head; i++)
+	for (i = 0; temp; i++)
 	{
-		_puts(head->s);
+		_puts((temp)->s);
 		_putchar(10);
-		head = head->next;
+		temp = (temp)->next;
 	}
 
 	return (i);

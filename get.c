@@ -22,8 +22,8 @@ char *read_line(int *flag)
 		}
 		if (isatty(STDIN_FILENO) == 1)
 			write(STDOUT_FILENO, "\n", 1);
-		_free_list(env_s);
-		_free_list(path_s);
+		//_free_list(env_s);
+		//_free_list(path_s);
 		free(line);
 		exit(98);
 	}

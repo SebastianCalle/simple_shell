@@ -2,21 +2,27 @@
 
 /**
  * _unsetenv - deletes the variable name of the environment
- * @name: name to delete
+ * @argc: Number of arguments
+ * @args: Multidimensional array of arguments
+ * @env_s: Environment linked list
  * Return: 0 if is succes or -1 if not
  */
-int _unsetenv(char *name)
+int _unsetenv(int argc, UN char *l, char **args, node_t **env_s)
 {
 	int idx;
 
-	if (name == NULL)
+	if (argc != 2)
+	{
+		write(STDERR_FILENO, "./hsh: 1: Number of arguments is wrong\n", 39);
+		return (-1);
+	}
+
+	idx = _find_node(env_s, args[1]);
+	if (idx == -1 || args == NULL)
 		return (-1);
 
-	idx = _find_node(&env_s, name);
-	if (idx == -1 || name == NULL)
-		return (-1);
 
-	_remove_node(&env_s, idx);
+	_remove_node(env_s, idx);
 
 	return (0);
 }
