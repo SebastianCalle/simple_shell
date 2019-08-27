@@ -10,14 +10,14 @@
 int _setenv(int argc, UN char *l, char **args, node_t **env_s)
 {
 	int idx;
-	char *str, *s1 = args[1], *s2 = "=", *s3 = args[2];
+	char *str, *s1, *s2 = "=", *s3;
 
 	if (argc != 3)
 	{
 		write(STDERR_FILENO, "./hsh: 1: Number of arguments is wrong\n", 39);
 		return (-1);
 	}
-
+	s1 = args[1], s3 = args[2];
 	str = malloc(_strlen(args[1]) + _strlen(args[2]) + 2);
 	if (str == NULL)
 	{

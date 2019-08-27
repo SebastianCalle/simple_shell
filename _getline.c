@@ -7,12 +7,10 @@
  */
 int _getline(char **buff)
 {
-	static char b[SIZE], *ptr = NULL;
+	static char b[SIZE];
+	char *ptr = NULL;
 	int len, i, flag = 0;
 	char c;
-
-//	for (i = 0; i < SIZE; i++)
-//		b[i] = 0;
 
 	for (i = 0; (c = _getchar()) != '\n'; i++)
 	{

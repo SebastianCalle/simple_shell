@@ -10,8 +10,7 @@
 int _cd(int argc, UN char *l, char **args, node_t **env_s)
 {
 	char *pwd = _getenv("PWD", env_s), *opwd = _getenv("OLDPWD", env_s);
-	char *home = _getenv("HOME", env_s);
-	char a[100];
+	char *home = _getenv("HOME", env_s), a[100];
 
 	if (argc > 2)
 	{

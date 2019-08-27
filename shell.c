@@ -28,15 +28,15 @@ int (*core_shell(char *arg))(int argc, char *l, char **args, node_t **link)
 int main(void)
 {
 	char *line;
-	char **args;
+	char **args = NULL;
+	int status = 1, j = 0, i, flag = 0, argc = 0;
 
-	int status = 1, j = 0, i, flag = 0;
 	_listed_env();
 	while (status)
 	{
 		signal_h();
 		_puts("(o-o) ");
-		line = read_line(&flag);
+		line = read_line(&flag, env_s);
 		if (line[0] == '\n')
 		{
 			free(line);
@@ -47,7 +47,7 @@ int main(void)
 		for (argc = 0; args[argc]; argc++)
 			;
 		core_shell(args[0])(argc, line, args, &env_s);
-		status = execute(args);
+		status = execute(args, line);
 		i = 0;
 		while (args[i] != NULL)
 		{
