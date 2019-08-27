@@ -3,6 +3,7 @@
 /**
  * _getenv - function searches the environment list
  * @env: variable to find
+ * @env_s: environment linked list
  * Return: the buffer
  */
 char *_getenv(char *env, node_t **env_s)

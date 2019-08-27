@@ -51,6 +51,7 @@ int temp_function(node_t *temp, int *status, char **argv, char *path)
  * @argv: Multidimensional string of arguments
  * @path: Environment path
  * @tok: Tokens of path
+ * @line: input line
  * Return: 0 on succes or -1 otherwise
  */
 int free_all(char **argv, char *path, char **tok, char *line)
@@ -82,6 +83,7 @@ int free_all(char **argv, char *path, char **tok, char *line)
 /**
  * _proexec - function that execute the arguments
  * @argv: arguments parameters
+ * @line: input line
  * Return: status or -1 if not succes
  */
 int _proexec(char **argv, char *line)
@@ -125,6 +127,5 @@ int _proexec(char **argv, char *line)
 	temp = path_s;
 	temp_function(temp, &status, argv, path);
 	free_all(argv, path, tok, line);
-
 	return (-1);
 }

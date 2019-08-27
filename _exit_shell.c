@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * free_all - function that free memory
+ * free_all2 - function that free memory
  * @args: argumentos to free
  * @line: string to free
  * @env_s: Environment linked list
@@ -52,8 +52,9 @@ void exit_estatus(char **args, char *line, node_t *env_s)
 }
 
 /**
- * _unsetenv - function that exits the program
+ * _exit_shell - function that exits the program
  * @argc: Number of arguments
+ * @l: input line
  * @args: Multidimensional array of arguments
  * @env_s: Environment linked list
  * Return: 0 if is succes or -1 if not

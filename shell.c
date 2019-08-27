@@ -2,6 +2,11 @@
 
 static node_t *env_s;
 
+/**
+ * core_shell - linked core of shell
+ * @arg: String of the command
+ * Return: 0 on succes or -1 otherwise
+ */
 int (*core_shell(char *arg))(int argc, char *l, char **args, node_t **link)
 {
 	int i;

@@ -2,6 +2,8 @@
 
 /**
  * read_line - read the line of function getline
+ * @flag: flag of function
+ * @env_s: environment linked list
  * Return: the line to read
  */
 char *read_line(int *flag, node_t *env_s)
@@ -22,7 +24,7 @@ char *read_line(int *flag, node_t *env_s)
 		if (isatty(STDIN_FILENO) == 1)
 			write(STDOUT_FILENO, "\n", 1);
 		_free_list(env_s);
-		//_free_list(path_s);
+		_free_list(path_s);
 		free(line);
 		exit(98);
 	}

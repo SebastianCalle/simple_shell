@@ -3,6 +3,7 @@
 /**
  * _print_list - function  that print list
  * @argc: Number of arguments
+ * @l: input line
  * @args: Multidimensional array of arguments
  * @head: Head of the linked list
  * Return: the number of nodes
