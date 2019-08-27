@@ -5,9 +5,9 @@
  * @env: variable to find
  * Return: the buffer
  */
-char *_getenv(char *env)
+char *_getenv(char *env, node_t **env_s)
 {
-	node_t *temp = env_s;
+	node_t *temp = *env_s;
 	char *buff;
 	int i, j, k = 0;
 
