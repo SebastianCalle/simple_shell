@@ -3,6 +3,7 @@
  * execute - function that execute the commands
  * @args: commands to execute
  * @line: input line
+ * @path_s: path linked list
  * Return: 1 if is succes
  */
 int execute(char **args, char *line, node_t **path_s)

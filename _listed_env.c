@@ -2,6 +2,7 @@
 
 /**
  * _listed_env - create a linked list of enviroment
+ * @env_s: env linked list
  */
 void _listed_env(node_t **env_s)
 {

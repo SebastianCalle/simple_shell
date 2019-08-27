@@ -74,7 +74,6 @@ int main(void)
  * free_all2 - function that free memory
  * @args: argumentos to free
  * @line: string to free
- * @env_s: Environment linked list
  */
 void free_all2(char **args, char *line)
 {

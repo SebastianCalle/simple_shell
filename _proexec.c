@@ -52,6 +52,7 @@ int temp_function(node_t *temp, int *status, char **argv, char *path)
  * @path: Environment path
  * @tok: Tokens of path
  * @line: input line
+ * @path_s: path linked list
  * Return: 0 on succes or -1 otherwise
  */
 int free_all(char **argv, char *path, char **tok, char *line, node_t *path_s)
@@ -84,18 +85,18 @@ int free_all(char **argv, char *path, char **tok, char *line, node_t *path_s)
  * _proexec - function that execute the arguments
  * @argv: arguments parameters
  * @line: input line
+ * @path_s: path linked list
  * Return: status or -1 if not succes
  */
 int _proexec(char **argv, char *line, node_t **path_s)
 {
 	pid_t pid;
-	int status, i, j, y = 0, k, l, m;
+	int status, i = _strcmp(argv[0], "env"), j, y = 0, k, l, m;
 	node_t *temp = NULL;
 	char *path = _getenviron("PATH"), **tok = _strtok(path, &y);
 
-	i = _strcmp(argv[0], "env"), j = _strcmp(argv[0], "setenv");
-	k = _strcmp(argv[0], "getenv"), l = _strcmp(argv[0], "cd");
-	m = _strcmp(argv[0], "unsetenv");
+	j = _strcmp(argv[0], "setenv"), k = _strcmp(argv[0], "getenv");
+	l = _strcmp(argv[0], "cd"), m = _strcmp(argv[0], "unsetenv");
 	if (argv[0][0] == '/')
 	{
 		pid = fork();
@@ -105,16 +106,18 @@ int _proexec(char **argv, char *line, node_t **path_s)
 			return (status);
 		}
 		if (pid < 0)
-			perror("sh:");
+			perror("./hsh: 1");
 		else
 			waitpid(pid, &status, WUNTRACED);
+		for (i = 0; tok[i]; i++)
+			free(tok[i]);
+		free(tok), free(path);
 		return (status);
 	}
 	else if (i == 0 || j == 0 || m == 0 || k == 0 || l == 0)
 	{
 		for (i = 0; tok[i]; i++)
-			if (tok[i])
-				free(tok[i]);
+			free(tok[i]);
 		free(tok), free(path);
 		return (0);
 	}
@@ -124,8 +127,7 @@ int _proexec(char **argv, char *line, node_t **path_s)
 			_add_node_end(path_s, _getenviron("PWD"));
 		_add_node_end(path_s, tok[i]);
 	}
-	temp = *path_s;
-	temp_function(temp, &status, argv, path);
+	temp = *path_s, temp_function(temp, &status, argv, path);
 	free_all(argv, path, tok, line, *path_s);
 	return (-1);
 }
