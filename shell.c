@@ -1,7 +1,7 @@
 #include "shell.h"
 
 static node_t *env_s;
-
+static node_t *path_s;
 /**
  * core_shell - linked core of shell
  * @arg: String of the command
@@ -36,12 +36,12 @@ int main(void)
 	char **args = NULL;
 	int status = 1, j = 0, i, flag = 0, argc = 0;
 
-	_listed_env();
+	_listed_env(&env_s);
 	while (status)
 	{
 		signal_h();
 		_puts("(o-o) ");
-		line = read_line(&flag, env_s);
+		line = read_line(&flag, env_s, path_s);
 		if (line[0] == '\n')
 		{
 			free(line);
@@ -52,7 +52,7 @@ int main(void)
 		for (argc = 0; args[argc]; argc++)
 			;
 		core_shell(args[0])(argc, line, args, &env_s);
-		status = execute(args, line);
+		status = execute(args, line, &path_s);
 		i = 0;
 		while (args[i] != NULL)
 		{
@@ -71,14 +71,25 @@ int main(void)
 }
 
 /**
- * _listed_env - create a linked list of enviroment
+ * free_all2 - function that free memory
+ * @args: argumentos to free
+ * @line: string to free
+ * @env_s: Environment linked list
  */
-void _listed_env(void)
+void free_all2(char **args, char *line)
 {
-	int i;
+	int i = 0;
 
-	for (i = 0; environ[i] != NULL; i++)
+	while (args[i])
 	{
-		_add_node_end(&env_s, environ[i]);
+		if (args[i])
+			free(args[i]);
+		i++;
 	}
+	if (args != NULL)
+		free(args);
+	if (line != NULL)
+		free(line);
+	_free_list(env_s);
+	_free_list(path_s);
 }

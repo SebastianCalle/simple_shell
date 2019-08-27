@@ -6,7 +6,7 @@
  * @env_s: environment linked list
  * Return: the line to read
  */
-char *read_line(int *flag, node_t *env_s)
+char *read_line(int *flag, node_t *env_s, node_t *path_s)
 {
 	char *line = NULL;
 	int f;

@@ -54,7 +54,7 @@ int temp_function(node_t *temp, int *status, char **argv, char *path)
  * @line: input line
  * Return: 0 on succes or -1 otherwise
  */
-int free_all(char **argv, char *path, char **tok, char *line)
+int free_all(char **argv, char *path, char **tok, char *line, node_t *path_s)
 {
 	struct stat st;
 	int i;
@@ -86,7 +86,7 @@ int free_all(char **argv, char *path, char **tok, char *line)
  * @line: input line
  * Return: status or -1 if not succes
  */
-int _proexec(char **argv, char *line)
+int _proexec(char **argv, char *line, node_t **path_s)
 {
 	pid_t pid;
 	int status, i, j, y = 0, k, l, m;
@@ -121,11 +121,11 @@ int _proexec(char **argv, char *line)
 	for (i = 0; tok[i]; i++)
 	{
 		if (path[0] == ':' && i == 0)
-			_add_node_end(&path_s, _getenviron("PWD"));
-		_add_node_end(&path_s, tok[i]);
+			_add_node_end(path_s, _getenviron("PWD"));
+		_add_node_end(path_s, tok[i]);
 	}
-	temp = path_s;
+	temp = *path_s;
 	temp_function(temp, &status, argv, path);
-	free_all(argv, path, tok, line);
+	free_all(argv, path, tok, line, *path_s);
 	return (-1);
 }

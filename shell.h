@@ -24,12 +24,11 @@ typedef struct node
 	char *s;
 	struct node *next;
 } node_t;
-
-//node_t *env_s;
-node_t *path_s;
-//extern node_t *env_s;
-extern node_t *path_s;
-
+/**
+ * struct core - Core of the linked list
+ * @str: String of the struct
+ * @f: Function of the struct
+ */
 typedef struct core
 {
 	char *str;
@@ -46,14 +45,14 @@ int _strcmp(char *s1, char *s2);
 char *_strchr(char *s, char c);
 char *_strcat(char *dest, char *src);
 char *_strdup(char *str);
-int _proexec(char **argv, char *line);
+int _proexec(char **argv, char *line, node_t **path_s);
 void sh_loop(void);
-char *read_line(int *flag, node_t *env_s);
+char *read_line(int *flag, node_t *env_s, node_t *path_s);
 int count_letters(char *str, int *index, int *i);
 int check_del(char c, char b);
 int count_arg(char *str);
 char **_strtok(char *buffer, int *j);
-int execute(char **args, char *line);
+int execute(char **args, char *line, node_t **path_s);
 int _getchar(void);
 int _getline(char **buf);
 char *lsh_read_line(void);
@@ -71,7 +70,7 @@ char *_getenv(char *env, node_t **env_s);
 node_t *_add_node_end(node_t **head, char *str);
 void _free_list(node_t *head);
 int _print_list(int argc, char *l, char **args, node_t **head);
-void _listed_env(void);
+void _listed_env(node_t **env_s);
 int _find_node(node_t **head, char *name);
 int _setenv(int argc, UN char *l, char **args, node_t **env_s);
 int _setenv1(char *name, char *value, node_t **env_s);
@@ -81,5 +80,6 @@ int _unsetenv(int argc, UN char *l, char **args, node_t **env_s);
 int _cd(int argc, UN char *l, char **args, node_t **env_s);
 int _exit_shell(int argc, UN char *l, char **args, node_t **env_s);
 int no_found(UN int argc, UN char *l, UN char **args, UN node_t **env_s);
+void free_all2(char **args, char *line);
 
 #endif

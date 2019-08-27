@@ -5,7 +5,7 @@
  * @line: input line
  * Return: 1 if is succes
  */
-int execute(char **args, char *line)
+int execute(char **args, char *line, node_t **path_s)
 {
 	pid_t pid;
 	int status;
@@ -13,7 +13,7 @@ int execute(char **args, char *line)
 	pid = fork();
 	if (pid == 0)
 	{
-		if ((_proexec(args, line)) == -1)
+		if ((_proexec(args, line, path_s)) == -1)
 			perror("sh");
 		exit(99);
 	}
