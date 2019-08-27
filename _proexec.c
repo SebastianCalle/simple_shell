@@ -106,6 +106,7 @@ int _proexec(char **argv, char *line)
 			perror("sh:");
 		else
 			waitpid(pid, &status, WUNTRACED);
+		return (status);
 	}
 	else if (i == 0 || j == 0 || m == 0 || k == 0 || l == 0)
 	{
