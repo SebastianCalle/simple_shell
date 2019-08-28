@@ -8,11 +8,14 @@
 int _strcmp(char *s1, char *s2)
 {
 	int i;
+	char *ss;
 
 	if (s1 == NULL || s2 == NULL)
 		return (-1);
 
-	for (i = 0; s1[i] != '\0'; i++)
+
+	ss = (_strlen(s1) > _strlen(s2)) ? s1 : s2;
+	for (i = 0; ss[i] != '\0'; i++)
 	{
 		if (s1[i] > s2[i])
 			return (s1[i] - s2[i]);
