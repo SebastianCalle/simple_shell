@@ -4,7 +4,6 @@
  * exit_estatus - check if exit have arguments
  * @args: arguments parameter
  * @line: string parameter
- * @env_s: Environment linked list
  */
 void exit_estatus(char **args, char *line)
 {
