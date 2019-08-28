@@ -1,6 +1,5 @@
 #include "shell.h"
 
-
 /**
  * temp_function - function that execute the nodes
  * @temp: node temporal
@@ -24,6 +23,8 @@ int temp_function(node_t *temp, int *status, char **argv, char *path)
 			return (-1);
 		while ((fil = readdir(dir)))
 		{
+			i = _strlen(fil->d_name);
+			fil->d_name[i] = '\0';
 			if ((_strcmp(fil->d_name, argv[0])) == 0)
 			{
 				len = _strlen(fil->d_name) + _strlen(temp->s) + 3;
@@ -99,14 +100,11 @@ int _proexec(char **argv, char *line, node_t **path_s)
 
 	j = _strcmp(argv[0], "setenv"), k = _strcmp(argv[0], "getenv");
 	l = _strcmp(argv[0], "cd"), m = _strcmp(argv[0], "unsetenv");
-	if (argv[0][0] == '/')
+	if (argv[0][0] == '/' || argv[0][1] == '/' || argv[0][2] == '/')
 	{
 		pid = fork();
 		if (pid == 0)
-		{
 			status = execve(argv[0], argv, NULL);
-			return (status);
-		}
 		if (pid < 0)
 			perror("./hsh: 1");
 		else
@@ -129,6 +127,7 @@ int _proexec(char **argv, char *line, node_t **path_s)
 			_add_node_end(path_s, _getenviron("PWD"));
 		_add_node_end(path_s, tok[i]);
 	}
+	_add_node_end(path_s, _getenviron("PWD"));
 	temp = *path_s, temp_function(temp, &status, argv, path);
 	free_all(argv, path, tok, line, *path_s);
 	return (-1);

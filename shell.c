@@ -28,7 +28,7 @@ int (*core_shell(char *arg))(int argc, char *l, char **args, node_t **link)
 int check_line(char *line)
 {
 	int i = 0;
-	
+
 	while (line[i])
 	{
 		if (line[i] > 32 && line[i] < 126)
