@@ -20,7 +20,10 @@ int _unsetenv(int argc, UN char *l, char **args, node_t **env_s)
 
 	idx = _find_node(env_s, args[1]);
 	if (idx == -1 || args == NULL)
+	{
+		write(STDERR_FILENO, "./hsh: 1: Invalid argument\n", 28);
 		return (-1);
+	}
 
 
 	_remove_node(env_s, idx);
