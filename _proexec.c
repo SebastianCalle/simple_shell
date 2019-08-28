@@ -34,7 +34,7 @@ int temp_function(node_t *temp, int *status, char **argv, char *path)
 					buff[i] = 0;
 				buff = _strcat(buff, temp->s), buff = _strcat(buff, slash);
 				buff = _strcat(buff, fil->d_name);
-				status2 = execve(buff, argv, environ);
+				status2 = execve(buff, argv, NULL);
 				closedir(dir), free(buff), free(path);
 				return (status2);
 			}
@@ -102,7 +102,7 @@ int _proexec(char **argv, char *line, node_t **path_s)
 		pid = fork();
 		if (pid == 0)
 		{
-			status = execve(argv[0], argv, environ);
+			status = execve(argv[0], argv, NULL);
 			return (status);
 		}
 		if (pid < 0)
