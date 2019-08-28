@@ -21,8 +21,6 @@ char *read_line(int *flag, node_t *env_s, node_t *path_s)
 			fflush(stdin);
 			return (line);
 		}
-		if (isatty(STDIN_FILENO) == 1)
-			write(STDOUT_FILENO, "\n", 1);
 		_free_list(env_s);
 		_free_list(path_s);
 		free(line);
