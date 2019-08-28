@@ -40,7 +40,7 @@ int main(void)
 	while (status)
 	{
 		signal_h();
-		_puts("(o-o) ");
+		_puts("");
 		line = read_line(&flag, env_s, path_s);
 		if (line[0] == '\n')
 		{
