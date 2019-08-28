@@ -23,7 +23,7 @@ void exit_estatus(char **args, char *line)
 			exit(i);
 		}
 		else
-			perror("perra");
+			perror("hsh:");
 	}
 }
 
