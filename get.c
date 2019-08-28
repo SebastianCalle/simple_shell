@@ -19,7 +19,7 @@ char *read_line(int *flag, node_t *env_s, node_t *path_s)
 		if (f == -2)
 		{
 			*flag = 1;
-			fflush(stdin);
+//			fflush(stdin);
 			return (line);
 		}
 		_free_list(env_s);
@@ -27,6 +27,6 @@ char *read_line(int *flag, node_t *env_s, node_t *path_s)
 		free(line);
 		exit(0);
 	}
-	fflush(stdin);
+//	fflush(stdin);
 	return (line);
 }

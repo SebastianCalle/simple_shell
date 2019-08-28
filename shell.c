@@ -68,6 +68,11 @@ int main(void)
 		status = execute(args, line, &env_s, &path_s);
 		status2 = status;
 		i = 0;
+		if (flag == 1)
+		{
+			free_all2(args, line);
+			break;
+		}
 		while (args[i] != NULL)
 		{
 			if (args[i])
@@ -78,8 +83,6 @@ int main(void)
 			free(args);
 		if (line != NULL)
 			free(line);
-		if (flag == 1)
-			break;
 		if (status == 0)
 			status2 = 1;
 	}
