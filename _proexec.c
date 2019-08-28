@@ -58,7 +58,7 @@ int temp_function(node_t *temp, int *status, char **argv, char *path)
  * @path_s: path linked list
  * Return: 0 on succes or -1 otherwise
  */
-int free_all(char **argv, char *path, char **tok, char *line, node_t *path_s)
+int free_all(char **argv, char *path, char **tok, char *line, node_t *e, node_t *p)
 {
 	struct stat st;
 	int i;
@@ -78,7 +78,8 @@ int free_all(char **argv, char *path, char **tok, char *line, node_t *path_s)
 		free(tok);
 		free(line);
 		free(argv);
-		_free_list(path_s);
+		_free_list(p);
+		_free_list(e);
 		return (-1);
 	}
 	return (0);
@@ -91,12 +92,12 @@ int free_all(char **argv, char *path, char **tok, char *line, node_t *path_s)
  * @path_s: path linked list
  * Return: status or -1 if not succes
  */
-int _proexec(char **argv, char *line, node_t **path_s)
+int _proexec(char **argv, char *line, node_t **env_s, node_t **path_s)
 {
 	pid_t pid;
 	int status, i = _strcmp(argv[0], "env"), j, y = 0, k, l, m;
 	node_t *temp = NULL;
-	char *path = _getenviron("PATH"), **tok = _strtok(path, &y);
+	char *path = _getenv("PATH", env_s), **tok = _strtok(path, &y), *tmp;
 
 	j = _strcmp(argv[0], "setenv"), k = _strcmp(argv[0], "getenv");
 	l = _strcmp(argv[0], "cd"), m = _strcmp(argv[0], "unsetenv");
@@ -127,8 +128,8 @@ int _proexec(char **argv, char *line, node_t **path_s)
 			_add_node_end(path_s, _getenviron("PWD"));
 		_add_node_end(path_s, tok[i]);
 	}
-	_add_node_end(path_s, _getenviron("PWD"));
+	_add_node_end(path_s, (tmp = _getenviron("PWD")));
 	temp = *path_s, temp_function(temp, &status, argv, path);
-	free_all(argv, path, tok, line, *path_s);
+	free_all(argv, path, tok, line, *env_s, *path_s), free(tmp);
 	return (-1);
 }

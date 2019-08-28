@@ -44,7 +44,7 @@ int check_line(char *line)
  */
 int main(void)
 {
-	char *line;
+	char *line = NULL;
 	char **args = NULL;
 	int status = 1, j = 0, i, flag = 0, argc = 0, status2 = 1;
 
@@ -65,7 +65,7 @@ int main(void)
 			;
 		core_shell(args[0])(argc, line, args, &env_s);
 		_exit_shell(line, args, &status);
-		status = execute(args, line, &path_s);
+		status = execute(args, line, &env_s, &path_s);
 		status2 = status;
 		i = 0;
 		while (args[i] != NULL)
