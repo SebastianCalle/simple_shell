@@ -4,6 +4,7 @@
  * read_line - read the line of function getline
  * @flag: flag of function
  * @env_s: environment linked list
+ * @path_s: path of enviroment
  * Return: the line to read
  */
 char *read_line(int *flag, node_t *env_s, node_t *path_s)
