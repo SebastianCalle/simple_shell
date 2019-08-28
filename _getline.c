@@ -17,11 +17,13 @@ int _getline(char **buff)
 		if (c == EOF && i > 0)
 		{
 			flag = 1;
+			_putchar('\n');
 			break;
 
 		}
 		if (c == EOF && i == 0)
 		{
+			_putchar('\n');
 			return (-1);
 		}
 		b[i] = c;
