@@ -94,7 +94,7 @@ int _proexec(char **argv, char *line, node_t **path_s)
 	pid_t pid;
 	int status, i = _strcmp(argv[0], "env"), j, y = 0, k, l, m;
 	node_t *temp = NULL;
-	char *path = _getenviron("PATH"), **tok = _strtok(path, &y);
+	char *path = _getenviron("PATH"), **tok = _strtok(path, &y), *tmp;
 
 	j = _strcmp(argv[0], "setenv"), k = _strcmp(argv[0], "getenv");
 	l = _strcmp(argv[0], "cd"), m = _strcmp(argv[0], "unsetenv");
@@ -125,8 +125,8 @@ int _proexec(char **argv, char *line, node_t **path_s)
 			_add_node_end(path_s, _getenviron("PWD"));
 		_add_node_end(path_s, tok[i]);
 	}
-	_add_node_end(path_s, _getenviron("PWD"));
+	_add_node_end(path_s, (tmp = _getenviron("PWD")));
 	temp = *path_s, temp_function(temp, &status, argv, path);
-	free_all(argv, path, tok, line, *path_s);
+	free_all(argv, path, tok, line, *path_s), free(tmp);
 	return (-1);
 }
