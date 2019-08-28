@@ -25,7 +25,7 @@ char *read_line(int *flag, node_t *env_s, node_t *path_s)
 		_free_list(env_s);
 		_free_list(path_s);
 		free(line);
-		exit(98);
+		exit(0);
 	}
 	fflush(stdin);
 	return (line);

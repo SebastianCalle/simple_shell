@@ -25,6 +25,18 @@ int (*core_shell(char *arg))(int argc, char *l, char **args, node_t **link)
 
 	return (no_found);
 }
+int check_line(char *line)
+{
+	int i = 0;
+	
+	while (line[i])
+	{
+		if (line[i] > 32 && line[i] < 126)
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 /**
  * main - Entry point
@@ -40,9 +52,9 @@ int main(void)
 	while (status)
 	{
 		signal_h();
-		_puts("");
+		_puts("(o O) ");
 		line = read_line(&flag, env_s, path_s);
-		if (line[0] == '\n')
+		if (check_line(line) == 1)
 		{
 			free(line);
 			continue;
