@@ -1,0 +1,94 @@
+#include "shell.h"
+
+static node_t *env_s;
+static node_t *path_s;
+/**
+ * core_shell - linked core of shell
+ * @arg: String of the command
+ * Return: 0 on succes or -1 otherwise
+ */
+int (*core_shell(char *arg))(int argc, char *l, char **args, node_t **link)
+{
+	int i;
+	core_t core[] = {
+		{"exit", _exit_shell},
+		{"env", _print_list},
+		{"setenv", _setenv},
+		{"unsetenv", _unsetenv},
+		{"cd", _cd},
+		{NULL, NULL}
+	};
+
+	for (i = 0; core[i].str; i++)
+		if (_strcmp(core[i].str, arg) == 0)
+			return (core[i].f);
+
+	return (no_found);
+}
+
+/**
+ * main - Entry point
+ * Return: 0 on success and diferrent of 0 otherwise
+ */
+int main(void)
+{
+	char *line;
+	char **args = NULL;
+	int status = 1, j = 0, i, flag = 0, argc = 0;
+
+	_listed_env(&env_s);
+	while (status)
+	{
+		signal_h();
+		_puts("(o-o) ");
+		line = read_line(&flag, env_s, path_s);
+		if (line[0] == '\n')
+		{
+			free(line);
+			continue;
+		}
+		j = 0;
+		args = _strtok(line, &j);
+		for (argc = 0; args[argc]; argc++)
+			;
+		core_shell(args[0])(argc, line, args, &env_s);
+		status = execute(args, line, &path_s);
+		i = 0;
+		while (args[i] != NULL)
+		{
+			if (args[i])
+				free(args[i]);
+			i++;
+		}
+		if (args != NULL)
+			free(args);
+		if (line != NULL)
+			free(line);
+		if (flag == 1)
+			break;
+	}
+	return (0);
+}
+
+/**
+ * free_all2 - function that free memory
+ * @args: argumentos to free
+ * @line: string to free
+ */
+void free_all2(char **args, char *line)
+{
+	int i = 0;
+
+	while (args[i])
+	{
+		if (args[i])
+			free(args[i]);
+		i++;
+	}
+	if (args != NULL)
+		free(args);
+	if (line != NULL)
+		free(line);
+	_free_list(env_s);
+	_free_list(path_s);
+}
