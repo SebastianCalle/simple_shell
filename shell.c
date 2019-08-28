@@ -25,6 +25,12 @@ int (*core_shell(char *arg))(int argc, char *l, char **args, node_t **link)
 
 	return (no_found);
 }
+
+/**
+ * check_line - Function that checks a line
+ * @line: line string
+ * Return: 0 on success or -1 otherwise
+ */
 int check_line(char *line)
 {
 	int i = 0;
@@ -65,20 +71,15 @@ int main(void)
 			;
 		core_shell(args[0])(argc, line, args, &env_s);
 		_exit_shell(line, args, &status);
-		status = execute(args, line, &env_s, &path_s);
-		status2 = status;
-		i = 0;
+		status = execute(args, line, &env_s, &path_s), status2 = status;
 		if (flag == 1)
 		{
 			free_all2(args, line);
 			break;
 		}
-		while (args[i] != NULL)
-		{
+		for (i = 0; args[i] != NULL; i++)
 			if (args[i])
 				free(args[i]);
-			i++;
-		}
 		if (args != NULL)
 			free(args);
 		if (line != NULL)

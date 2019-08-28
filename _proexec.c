@@ -42,8 +42,6 @@ int temp_function(node_t *temp, int *status, char **argv, char *path)
 		}
 		temp = temp->next;
 		free(dir);
-		
-	
 	}
 	return (0);
 
@@ -53,30 +51,31 @@ int temp_function(node_t *temp, int *status, char **argv, char *path)
  * free_all - Function that frees the malloc
  * @argv: Multidimensional string of arguments
  * @path: Environment path
- * @tok: Tokens of path
- * @line: input line
- * @path_s: path linked list
+ * @to: Tokens of path
+ * @l: input line
+ * @p: path linked list
+ * @e: env linked list
  * Return: 0 on succes or -1 otherwise
  */
-int free_all(char **argv, char *path, char **tok, char *line, node_t *e, node_t *p)
+int free_all(char **argv, char *path, char **to, char *l, node_t *e, node_t *p)
 {
 	struct stat st;
 	int i;
 
 	if (stat(argv[0], &st) != 0)
 	{ free(path);
-		for (i = 0; tok[i]; i++)
+		for (i = 0; to[i]; i++)
 		{
-			if (tok[i])
-				free(tok[i]);
+			if (to[i])
+				free(to[i]);
 		}
 		for (i = 0; argv[i]; i++)
 		{
 			if (argv[i])
 				free(argv[i]);
 		}
-		free(tok);
-		free(line);
+		free(to);
+		free(l);
 		free(argv);
 		_free_list(p);
 		_free_list(e);
@@ -88,11 +87,12 @@ int free_all(char **argv, char *path, char **tok, char *line, node_t *e, node_t 
 /**
  * _proexec - function that execute the arguments
  * @argv: arguments parameters
- * @line: input line
+ * @li: input line
  * @path_s: path linked list
+ * @env_s: path linked list
  * Return: status or -1 if not succes
  */
-int _proexec(char **argv, char *line, node_t **env_s, node_t **path_s)
+int _proexec(char **argv, char *li, node_t **env_s, node_t **path_s)
 {
 	pid_t pid;
 	int status, i = _strcmp(argv[0], "env"), j, y = 0, k, l, m;
@@ -130,6 +130,6 @@ int _proexec(char **argv, char *line, node_t **env_s, node_t **path_s)
 	}
 	_add_node_end(path_s, (tmp = _getenviron("PWD")));
 	temp = *path_s, temp_function(temp, &status, argv, path);
-	free_all(argv, path, tok, line, *env_s, *path_s), free(tmp);
+	free_all(argv, path, tok, li, *env_s, *path_s), free(tmp);
 	return (-1);
 }

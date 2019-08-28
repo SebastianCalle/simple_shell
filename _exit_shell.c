@@ -31,10 +31,9 @@ void exit_estatus(char **args, char *line)
 
 /**
  * _exit_shell - function that exits the program
- * @argc: Number of arguments
  * @l: input line
  * @args: Multidimensional array of arguments
- * @env_s: Environment linked list
+ * @status: status of program
  * Return: 0 if is succes or -1 if not
  */
 int _exit_shell(char *l, char **args, int *status)
