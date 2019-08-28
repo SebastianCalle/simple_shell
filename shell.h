@@ -76,7 +76,7 @@ int _remove_node(node_t **head, int idx);
 node_t *_add_node_idx(node_t **head, char *str, int idx);
 int _unsetenv(int argc, UN char *l, char **args, node_t **env_s);
 int _cd(int argc, UN char *l, char **args, node_t **env_s);
-int _exit_shell(int argc, UN char *l, char **args, node_t **env_s);
+int _exit_shell(char *line, char **args, int *stats);
 int no_found(UN int argc, UN char *l, UN char **args, UN node_t **env_s);
 void free_all2(char **args, char *line);
 

@@ -9,14 +9,16 @@
 int execute(char **args, char *line, node_t **path_s)
 {
 	pid_t pid;
-	int status;
+	int status, status2;
 
 	pid = fork();
 	if (pid == 0)
 	{
 		if ((_proexec(args, line, path_s)) == -1)
+		{
 			perror("sh");
-		exit(99);
+		}
+		exit(127);
 	}
 	else if (pid < 0)
 	{
@@ -25,7 +27,11 @@ int execute(char **args, char *line, node_t **path_s)
 	else
 	{
 		waitpid(pid, &status, 0);
+		if (WIFEXITED(status))
+		{
+			status2 = WEXITSTATUS(status);
+		}
 	}
 
-	return (1);
+	return (status2);
 }

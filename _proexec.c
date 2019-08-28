@@ -41,6 +41,8 @@ int temp_function(node_t *temp, int *status, char **argv, char *path)
 		}
 		temp = temp->next;
 		free(dir);
+		
+	
 	}
 	return (0);
 

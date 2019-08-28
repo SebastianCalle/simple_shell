@@ -9,9 +9,9 @@ static node_t *path_s;
  */
 int (*core_shell(char *arg))(int argc, char *l, char **args, node_t **link)
 {
+
 	int i;
 	core_t core[] = {
-		{"exit", _exit_shell},
 		{"env", _print_list},
 		{"setenv", _setenv},
 		{"unsetenv", _unsetenv},
@@ -46,10 +46,10 @@ int main(void)
 {
 	char *line;
 	char **args = NULL;
-	int status = 1, j = 0, i, flag = 0, argc = 0;
+	int status = 1, j = 0, i, flag = 0, argc = 0, status2 = 1;
 
 	_listed_env(&env_s);
-	while (status)
+	while (status2)
 	{
 		signal_h();
 		_puts("(o O) ");
@@ -64,7 +64,9 @@ int main(void)
 		for (argc = 0; args[argc]; argc++)
 			;
 		core_shell(args[0])(argc, line, args, &env_s);
+		_exit_shell(line, args, &status);
 		status = execute(args, line, &path_s);
+		status2 = status;
 		i = 0;
 		while (args[i] != NULL)
 		{
@@ -78,6 +80,8 @@ int main(void)
 			free(line);
 		if (flag == 1)
 			break;
+		if (status == 0)
+			status2 = 1;
 	}
 	return (0);
 }

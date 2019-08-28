@@ -22,7 +22,10 @@ void exit_estatus(char **args, char *line)
 			exit(i);
 		}
 		else
-			perror("hsh:");
+		{
+			free_all2(args, line);
+			exit(0);
+		}
 	}
 }
 
@@ -34,9 +37,15 @@ void exit_estatus(char **args, char *line)
  * @env_s: Environment linked list
  * Return: 0 if is succes or -1 if not
  */
-int _exit_shell(UN int argc, char *l, char **args, UN node_t **env_s)
+int _exit_shell(char *l, char **args, int *status)
 {
-	exit_estatus(args, l);
-	free_all2(args, l);
-	exit(0);
+	if (_strcmp(args[0], "exit") == 0)
+	{
+		exit_estatus(args, l);
+		free_all2(args, l);
+		if (*status == 1)
+			exit(0);
+		exit(*status);
+	}
+	return (0);
 }
