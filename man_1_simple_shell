@@ -1,0 +1,143 @@
+.TH man 1 "August 29th 2019" "1.0" "Simple Shell Commands Manual"
+.SH NAME
+.br
+.B Simple Shell
+.br
+.SH SYNOPSIS
+.br
+.B ./hsh
+.br
+.SH DESCRIPTION
+.br
+The simple shell is a command interpretor in the Unix or GNU/Linux operating system, it is a program that executes another programs and provides the user an interface to the Linux system.
+.br
+.SH OPTIONS
+.br
+.B [Interactive Mode]
+.PP
+./hsh
+.br
+($) /bin/ls
+.br
+hsh main.c shell.c
+.br
+($)
+.br
+($) exit
+.br
+.PP
+.B [Non Interactive Mode]
+.PP
+$ echo "bin/ls" | ./hsh
+.br
+hsh main.c shell.c test_ls_2
+.br
+$
+.br
+$ cat test_ls_2
+.br
+/bin/ls
+.br
+/bin/ls
+.br
+$
+.br
+$ cat test_ls_2 | ./hsh
+.br
+hsh main.c shell.c test_ls_2
+.br
+hsh main.c shell.c test_ls_2
+.br
+$
+.br
+.PP
+.br
+.SH EXAMPLE
+.br
+int main(void)
+.br
+{
+.br
+	char *line;
+.br
+	char **args = NULL;
+.br
+	int status = 1, j = 0, i, flag = 0, argc = 0;
+.br
+	_listed_env(&env_s);
+.br
+	while (status)
+.br
+	{
+.br
+		signal_h();
+.br
+		_puts("(o-o) ");
+.br
+		line = read_line(&flag, env_s, path_s);
+.br
+		if (line[0] == '\n')
+.br
+		{
+.br
+		free(line);
+.br
+		continue;
+.br
+		}
+.br
+		j = 0;
+.br
+		args = _strtok(line, &j);
+.br
+		for (argc = 0; args[argc]; argc++)
+.br
+		    	  ;
+.br			  
+		core_shell(args[0])(argc, line, args, &env_s);
+.br
+		status = execute(args, line, &path_s);
+.br
+		i = 0;
+.br
+		while (args[i] != NULL)
+.br
+		{
+.br
+			if (args[i])
+.br
+				free(args[i]);
+.br
+			i++;
+.br
+		}
+.br
+		if (args != NULL)
+.br
+		   	 free(args);
+.br
+		if (line != NULL)
+.br
+		   	 free(line);
+.br
+	        if (flag == 1)
+.br
+		   	 break;
+.br
+	}
+.br
+	return (0);
+.br
+}		
+.br
+.SH SEE ALSO
+.br
+.I sh(1)
+.br
+.SH BUGS
+.br
+The simple shell does not support: The ; separator, && or || shell logical operators, alias, history and help builtin command, replacement variables, comments. 
+.br
+.SH AUTHORS
+.br
+Sebastián Montealegre - Hugo Vargas
