@@ -125,10 +125,10 @@ int _proexec(char **argv, char *li, node_t **env_s, node_t **path_s)
 	for (i = 0; tok[i]; i++)
 	{
 		if (path[0] == ':' && i == 0)
-			_add_node_end(path_s, _getenviron("PWD"));
+			_add_node_end(path_s, _getenv("PWD", env_s));
 		_add_node_end(path_s, tok[i]);
 	}
-	_add_node_end(path_s, (tmp = _getenviron("PWD")));
+	_add_node_end(path_s, (tmp = _getenv("PWD", env_s)));
 	temp = *path_s, temp_function(temp, &status, argv, path);
 	free_all(argv, path, tok, li, *env_s, *path_s), free(tmp);
 	return (-1);

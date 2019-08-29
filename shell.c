@@ -7,6 +7,7 @@ static node_t *path_s;
  * no_inter - Function thats configurate executable with argument
  * @ac: Number of arguments
  * @av: Multidimensional array of arguments
+ * Return: Always 0 Success
  */
 int no_inter(int ac, char **av)
 {
@@ -21,7 +22,7 @@ int no_inter(int ac, char **av)
 	{
 		for (j = 0; av[i][j]; j++)
 			;
-	        argv[i - 1] = _strdup(av[i]);
+		argv[i - 1] = _strdup(av[i]);
 	}
 
 	execve(argv[0], argv, NULL);
@@ -75,6 +76,8 @@ int check_line(char *line)
 
 /**
  * main - Entry point
+ * @ac: Number of arguments
+ * @av: Multidimensiona array of arguments
  * Return: 0 on success and diferrent of 0 otherwise
  */
 int main(int ac, char **av)
@@ -85,7 +88,7 @@ int main(int ac, char **av)
 
 	_listed_env(&env_s);
 	if (ac == 1)
-		for (;status2; j = 0)
+		for (; status2; j = 0)
 		{
 			signal_h(), _puts("(o O) ");
 			line = read_line(&flag, env_s, path_s);
