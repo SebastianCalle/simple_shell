@@ -1,6 +1,6 @@
 #ifndef SHELL_H
 #define SHELL_H
-#define SIZE 1024
+#define SIZE 15024
 #define UN __attribute__((__unused__))
 #include <stdio.h>
 #include <unistd.h>
