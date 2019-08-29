@@ -44,6 +44,7 @@ int (*core_shell(char *arg))(int argc, char *l, char **args, node_t **link)
 		{"setenv", _setenv},
 		{"unsetenv", _unsetenv},
 		{"cd", _cd},
+		{"pwd", _pwd},
 		{NULL, NULL}
 	};
 
