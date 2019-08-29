@@ -84,7 +84,7 @@ int main(int ac, char **av)
 {
 	char *line = NULL;
 	char **args = NULL;
-	int status = 1, j = 0, i, flag = 0, argc = 0, status2 = 1;
+	int status = 0, j = 0, i, flag = 0, argc = 0, status2 = 0;
 
 	_listed_env(&env_s);
 	if (ac == 1)
@@ -141,6 +141,7 @@ void free_all2(char **args, char *line)
 		free(args);
 	if (line != NULL)
 		free(line);
+	args = NULL;
 	_free_list(env_s);
 	_free_list(path_s);
 }
