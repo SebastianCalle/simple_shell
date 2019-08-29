@@ -86,7 +86,7 @@ int main(int ac, char **av)
 	char **args = NULL;
 	int status = 0, j = 0, i, flag = 0, argc = 0, status2 = 0;
 
-	_listed_env(&env_s);
+	_listed_env(&env_s), status = 1, status = 1;
 	if (ac == 1)
 		for (; status2; j = 0)
 		{
