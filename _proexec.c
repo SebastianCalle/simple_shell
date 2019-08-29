@@ -105,14 +105,14 @@ int _proexec(char **argv, char *li, node_t **env_s, node_t **path_s)
 	{
 		pid = fork();
 		if (pid == 0)
-			status = execve(argv[0], argv, NULL);
+			status = execve(argv[0], argv, environ);
 		if (pid < 0)
 			perror("./hsh: 1");
 		else
 			waitpid(pid, &status, WUNTRACED);
 		for (i = 0; tok[i]; i++)
 			free(tok[i]);
-		free(tok), free(path);
+		free(tok), free(path), free_all2(argv, li);
 		return (status);
 	}
 	else if (i == 0 || j == 0 || m == 0 || k == 0 || l == 0)

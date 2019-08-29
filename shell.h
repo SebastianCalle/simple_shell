@@ -35,7 +35,6 @@ typedef struct core
 
 int _isdigit(int c);
 int _atoi(char *s);
-
 int _strlen(char *s);
 void *_memcpy(char *dest, char *src, int n);
 char *_strcpy(char *dest, char *src);

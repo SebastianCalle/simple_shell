@@ -2,6 +2,34 @@
 
 static node_t *env_s;
 static node_t *path_s;
+
+/**
+ * no_inter - Function thats configurate executable with argument
+ * @ac: Number of arguments
+ * @av: Multidimensional array of arguments
+ */
+int no_inter(int ac, char **av)
+{
+	int i, j;
+	char **argv;
+
+	argv = malloc(ac);
+	if (argv == NULL)
+		return (-1);
+
+	for (i = 1; av[i]; i++)
+	{
+		for (j = 0; av[i][j]; j++)
+			;
+	        argv[i - 1] = _strdup(av[i]);
+	}
+
+	execve(argv[0], argv, NULL);
+
+	return (0);
+}
+
+
 /**
  * core_shell - linked core of shell
  * @arg: String of the command
@@ -48,45 +76,45 @@ int check_line(char *line)
  * main - Entry point
  * Return: 0 on success and diferrent of 0 otherwise
  */
-int main(void)
+int main(int ac, char **av)
 {
 	char *line = NULL;
 	char **args = NULL;
 	int status = 1, j = 0, i, flag = 0, argc = 0, status2 = 1;
 
 	_listed_env(&env_s);
-	while (status2)
-	{
-		signal_h();
-		_puts("(o O) ");
-		line = read_line(&flag, env_s, path_s);
-		if (check_line(line) == 1)
+	if (ac == 1)
+		for (;status2; j = 0)
 		{
-			free(line);
-			continue;
+			signal_h(), _puts("(o O) ");
+			line = read_line(&flag, env_s, path_s);
+			if (check_line(line) == 1)
+			{
+				free(line);
+				continue;
+			}
+			args = _strtok(line, &j);
+			for (argc = 0; args[argc]; argc++)
+				;
+			core_shell(args[0])(argc, line, args, &env_s);
+			_exit_shell(line, args, &status);
+			status = execute(args, line, &env_s, &path_s), status2 = status;
+			if (flag == 1)
+			{
+				free_all2(args, line);
+				break;
+			}
+			for (i = 0; args[i] != NULL; i++)
+				if (args[i])
+					free(args[i]);
+			if (args != NULL)
+				free(args);
+			if (line != NULL)
+				free(line);
+			(status == 0) ? status2 = 1 : status;
 		}
-		j = 0;
-		args = _strtok(line, &j);
-		for (argc = 0; args[argc]; argc++)
-			;
-		core_shell(args[0])(argc, line, args, &env_s);
-		_exit_shell(line, args, &status);
-		status = execute(args, line, &env_s, &path_s), status2 = status;
-		if (flag == 1)
-		{
-			free_all2(args, line);
-			break;
-		}
-		for (i = 0; args[i] != NULL; i++)
-			if (args[i])
-				free(args[i]);
-		if (args != NULL)
-			free(args);
-		if (line != NULL)
-			free(line);
-		if (status == 0)
-			status2 = 1;
-	}
+	else if (ac > 1 && av != NULL)
+		no_inter(ac, av);
 	return (0);
 }
 
