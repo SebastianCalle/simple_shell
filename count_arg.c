@@ -98,7 +98,7 @@ cont:
  */
 int count_arg(char *str)
 {
-	int i, c = 0;
+	int i = 0, c = 0;
 
 	for (i = 0; str[i]; i++)
 	{

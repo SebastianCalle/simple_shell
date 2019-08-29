@@ -8,11 +8,11 @@
 char **_strtok(char *buffer, int *n)
 {
 	char **args = NULL;
-	int a = 0, cl = 0, k, in, j;
+	int a = 0, cl = 0, k = 0, in = 0, j = 0;
 	int index = 0, i = 0;
 
 	a = count_arg(buffer);
-	args = malloc(sizeof(char *) * (a + 1));
+	args = _calloc(a + 1, sizeof(char *));
 	if (args == NULL)
 		return (NULL);
 	args[a] = NULL;

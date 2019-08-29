@@ -79,5 +79,6 @@ int _exit_shell(char *line, char **args, int *stats);
 int no_found(UN int argc, UN char *l, UN char **args, UN node_t **env_s);
 void free_all2(char **args, char *line);
 int _pwd(UN int argc, UN char *l, UN char **args, node_t **env_s);
+void *_calloc(unsigned int nmemb, unsigned int size);
 
 #endif
