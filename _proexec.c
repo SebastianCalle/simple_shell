@@ -97,7 +97,7 @@ int _proexec(char **argv, char *li, node_t **env_s, node_t **path_s)
 	pid_t pid;
 	int status, i = _strcmp(argv[0], "env"), j, y = 0, k, l, m;
 	node_t *temp = NULL;
-	char *path = _getenv("PATH", env_s), **tok = _strtok(path, &y), *tmp;
+	char *path, **tok, *tmp;
 
 	j = _strcmp(argv[0], "setenv"), k = _strcmp(argv[0], "getenv");
 	l = _strcmp(argv[0], "cd"), m = _strcmp(argv[0], "unsetenv");
@@ -105,17 +105,16 @@ int _proexec(char **argv, char *li, node_t **env_s, node_t **path_s)
 	{
 		pid = fork();
 		if (pid == 0)
-			status = execve(argv[0], argv, environ);
+			status = execve(argv[0], argv, NULL);
 		if (pid < 0)
 			perror("./hsh: 1");
 		else
 			waitpid(pid, &status, WUNTRACED);
-		for (i = 0; tok[i]; i++)
-			free(tok[i]);
-		free(tok), free(path), free_all2(argv, li);
+		free_all2(argv, li);
 		return (status);
 	}
-	else if (i == 0 || j == 0 || m == 0 || k == 0 || l == 0)
+	path = _getenv("PATH", env_s), tok = _strtok(path, &y);
+        if (i == 0 || j == 0 || m == 0 || k == 0 || l == 0)
 	{
 		for (i = 0; tok[i]; i++)
 			free(tok[i]);
