@@ -105,7 +105,7 @@ int _proexec(char **argv, char *li, node_t **env_s, node_t **path_s)
 	{
 		pid = fork();
 		if (pid == 0)
-			status = execve(argv[0], argv, NULL);
+			status = execve(argv[0], argv, environ);
 		if (pid < 0)
 			perror("./hsh: 1");
 		else
